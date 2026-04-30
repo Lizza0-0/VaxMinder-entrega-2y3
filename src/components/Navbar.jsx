@@ -18,11 +18,11 @@ export const Navbar = () => {
         <Link to="/" className="navbar-logo">
           <span>💉 VaxMinder</span>
         </Link>
-        
+
         {user ? (
           <div className="navbar-menu">
             <div className="nav-info">
-              <span className="user-name">Bienvenido, {user.nombres}</span>
+              <span className="user-name">Bienvenido, {user.nombre}</span>
             </div>
             <ul className="nav-list">
               <li><Link to="/dashboard">Dashboard</Link></li>

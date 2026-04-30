@@ -42,9 +42,9 @@
   box-shadow: var(--shadow-lg);
 }
 
-.stat-card.alert {
-  border-left: 4px solid var(--warning-color);
-}
+  .stat-card.clickable {
+    cursor: pointer;
+  }
 
 .stat-icon {
   font-size: 2.5rem;
@@ -120,3 +120,25 @@
     padding: 1.5rem;
   }
 }
+
+/* ── Vacunas sugeridas ──────────────────────────── */
+.sugeridas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.sugerida-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--color-surface, #f9fafb);
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px;
+}
+.sugerida-icon { font-size: 24px; flex-shrink: 0; }
+.sugerida-info strong { display: block; font-size: 14px; color: #111; margin-bottom: 4px; }
+.sugerida-info p { font-size: 12px; color: #6b7280; margin-bottom: 4px; line-height: 1.4; }
+.sugerida-dosis { font-size: 11px; font-weight: 600; color: #059669; background: #d1fae5; padding: 2px 8px; border-radius: 12px; }
+.section-hint { font-size: 12px; color: #9ca3af; margin-bottom: 12px; }

@@ -1,339 +1,183 @@
-# VaxMinder - Carnet de Vacunación Digital
+# 💉 VaxMinder – Carnet Digital de Vacunación
 
-## 📋 Descripción del Proyecto
-
-VaxMinder es una aplicación web moderna construida con **React** y **Vite** que permite a los usuarios gestionar su carnet de vacunación digital. La aplicación implementa un sistema completo de autenticación, navegación dinámica, gestión de estado y rutas protegidas.
-
-## 🎯 Objetivos del Proyecto (Hito 2)
-
-- ✅ Aplicación modularizada en componentes y páginas
-- ✅ Flujo de información mediante Props y Context API
-- ✅ Navegación dinámica entre páginas y subpáginas
-- ✅ Lógica de acceso con Login y Registro
-- ✅ Páginas protegidas basadas en autenticación
-- ✅ Gestión de estado con React Hooks (useState, useContext)
-- ✅ Datos simulados con servicios (Mocks)
-- ✅ Validaciones en formularios
-- ✅ Persistencia de datos en localStorage
-
-## 📁 Estructura del Proyecto
-
-```
-src/
-├── components/              # Componentes reutilizables
-│   ├── Navbar.jsx          # Barra de navegación principal
-│   └── ProtectedRoute.jsx  # Componente para proteger rutas privadas
-├── pages/                   # Páginas principales de la aplicación
-│   ├── HomePage.jsx        # Página de inicio
-│   ├── LoginPage.jsx       # Página de login
-│   ├── RegistroPage.jsx    # Página de registro
-│   ├── DashboardPage.jsx   # Dashboard del usuario
-│   ├── CarnetPage.jsx      # Gestión del carnet de vacunación
-│   ├── CentrosPage.jsx     # Listado de centros médicos
-│   ├── AlertasPage.jsx     # Gestión de alertas
-│   └── HistorialPage.jsx   # Historial de actividades
-├── context/                # Context API para estado global
-│   └── AuthContext.jsx     # Contexto de autenticación
-├── services/               # Servicios y mocks de datos
-│   └── index.js           # Todos los servicios simulados
-├── styles/                 # Estilos CSS
-│   ├── index.css          # Estilos globales
-│   ├── navbar.css         # Estilos de navegación
-│   ├── auth.css           # Estilos de autenticación
-│   ├── home.css           # Estilos de home
-│   ├── dashboard.css      # Estilos de dashboard
-│   ├── carnet.css         # Estilos de carnet
-│   ├── centros.css        # Estilos de centros
-│   ├── alertas.css        # Estilos de alertas
-│   ├── historial.css      # Estilos de historial
-│   └── App.css            # Estilos de app
-├── App.jsx                 # Componente raíz con rutas
-└── main.jsx                # Punto de entrada de la aplicación
-```
-
-
-La aplicación estará disponible en `http://localhost:5173`
-
-## 📱 Funcionalidades Implementadas
-
-### 1. Sistema de Autenticación (HU05, HU06)
-- **Registro de Usuarios**: Formulario completo con validaciones
-  - Nombres, Apellidos
-  - Tipo de Documento y Número
-  - Edad y Email
-  - Almacenamiento en localStorage
-
-- **Login**: Acceso con número de documento
-  - Validación de usuario existente
-  - Persistencia de sesión
-  - Restauración automática al recargar
-
-### 2. Rutas Protegidas (HU07)
-- Componente `ProtectedRoute` que valida autenticación
-- Redirección automática a login si no está logueado
-- Protección de todas las páginas privadas
-
-### 3. Gestión de Carnet de Vacunación (HU08, HU09)
-- Visualización de vacunaciones registradas
-- Formulario para registrar nueva vacunación
-  - Selección de vacuna
-  - Número de dosis
-  - Centro médico
-  - Fecha
-- Tarjetas visuales con información de vacunas
-- Validaciones de campos requeridos
-
-### 4. Centros Médicos
-- Listado dinámico de centros disponibles
-- Información: ubicación, teléfono, horario
-- Tarjetas interactivas
-
-### 5. Alertas de Vacunación
-- Creación de alertas para próximas vacunas
-- Visualización de alertas activas
-- Registro de alertas vistas
-- Validaciones en formularios
-
-### 6. Historial de Actividades
-- Timeline visual de actividades
-- Registro automático de eventos
-- Ordenamiento cronológico
-
-### 7. Dashboard
-- Estadísticas visuales
-- Información del usuario
-- Acceso rápido a funcionalidades
-
-### 8. Cierre de Sesión (HU10)
-- Botón logout en navbar
-- Limpieza de sesión y localStorage
-- Redirección a home
-
-## 🔐 Lógica de Acceso y Autenticación
-
-### AuthContext (Context API)
-El contexto maneja:
-- **State**: Usuario logueado, estado de carga
-- **Métodos**: login(), register(), logout()
-- **Persistencia**: localStorage para mantener sesión
-
-### ProtectedRoute
-- Valida si hay usuario logueado
-- Si no: Redirige a `/login`
-- Si sí: Renderiza el componente protegido
-
-### Flow de Autenticación
-```
-Usuario no autenticado
-    ↓
-Accede a /registro o /login
-    ↓
-Llena formulario (registro) o documento (login)
-    ↓
-AuthContext guarda en localStorage y state
-    ↓
-ProtectedRoute valida y permite acceso
-    ↓
-Usuario ve su Dashboard
-    ↓
-Logout limpia state y localStorage
-```
-
-## 📊 Gestión de Estado
-
-### useState Hooks
-- Formularios: `formData`, `error`, `loading`
-- Listas: `carnet`, `centros`, `alertas`, `historial`
-- UI: `showForm`
-
-### Context API
-- `AuthContext`: Usuario global y métodos de autenticación
-
-### Flujo de Datos (Props)
-- Componentes reciben datos como props
-- Props.children para composición
-- Callbacks para eventos
-
-## 🔄 Flujo de Datos entre Componentes
-
-```
-App (Rutas principales)
-  ├── AuthProvider (Context global)
-  │   └── Navbar (Usa AuthContext para mostrar usuario)
-  │       └── Pages (Rutas protegidas por ProtectedRoute)
-  │           ├── DashboardPage
-  │           │   ├── useState para stats
-  │           │   └── Services para obtener datos
-  │           ├── CarnetPage
-  │           │   ├── useState para carnet list
-  │           │   ├── Formulario controlado
-  │           │   └── Service carnetService
-  │           └── AlertasPage, CentrosPage, etc.
-```
-
-## 💾 Servicios y Mocks de Datos
-
-Ubicación: `src/services/index.js`
-
-Servicios implementados:
-- `usuariosService`: Gestión de usuarios
-- `carnetService`: Vacunaciones del usuario
-- `centrosService`: Centros médicos disponibles
-- `vacunasService`: Catálogo de vacunas
-- `alertasService`: Alertas de vacunación
-- `historialService`: Historial de actividades
-
-Todos usan **localStorage** para persistencia simulada.
-
-## ✅ Validaciones Implementadas
-
-### Registro
-- Nombres y apellidos no vacíos
-- Documento requerido
-- Edad válida (0-120)
-- Email válido (regex)
-
-### Login
-- Documento no vacío
-- Documento debe existir
-
-### Carnet
-- Todos los campos requeridos
-- Vacuna, dosis, centro, fecha obligatorios
-
-### Alertas
-- Vacuna y fecha próxima obligatorios
-
-### Feedback Visual
-- Mensajes de error con estilo específico
-- Estados de loading en botones
-- Disabled para inputs durante procesamiento
-
-## 🎨 Estilos y Diseño
-
-- **CSS Modular**: Un archivo CSS por página/componente
-- **Variables CSS**: Colores, sombras, espaciados centralizados
-- **Responsive Design**: Mobile-first approach
-- **Gradientes**: Gradientes de color en secciones principales
-- **Animaciones**: Transiciones suaves en hover
-
-### Paleta de Colores
-- Primary: #4f46e5 (Indigo)
-- Secondary: #06b6d4 (Cyan)
-- Danger: #ef4444 (Red)
-- Success: #10b981 (Green)
-- Warning: #f59e0b (Amber)
-
-## 📝 Rutas de la Aplicación
-
-| Ruta | Tipo | Descripción |
-|------|------|-------------|
-| `/` | Pública | Página de inicio |
-| `/login` | Pública | Iniciar sesión |
-| `/registro` | Pública | Crear cuenta |
-| `/dashboard` | Protegida | Dashboard del usuario |
-| `/carnet` | Protegida | Mi carnet de vacunación |
-| `/centros` | Protegida | Centros médicos |
-| `/alertas` | Protegida | Gestión de alertas |
-| `/historial` | Protegida | Historial de actividades |
-
-## 🔧 Dependencias Principales
-
-```json
-{
-  "react": "^18.2.0",
-  "react-dom": "^18.2.0",
-  "react-router-dom": "^6.14.0"
-}
-```
-
-## 🧪 Testing Manual
-
-### Flujo de Registro
-1. Ir a `/registro`
-2. Llenar todos los campos
-3. Hacer clic en "Crear Cuenta"
-4. Sistema debe ir a `/dashboard`
-
-### Flujo de Login
-1. Ir a `/login`
-2. Ingresar documento usado en registro
-3. Sistema debe ir a `/dashboard`
-
-### Rutas Protegidas
-1. Sin sesión: Acceder a `/carnet` redirige a `/login`
-2. Con sesión: `/carnet` muestra el carnet
-
-### Gestión de Datos
-1. Agregar vacunación en `/carnet`
-2. Ver datos en dashboard stats
-3. Recargar página - datos persisten
-
-## 📚 Conceptos Clave Utilizados
-
-### React Hooks
-- **useState**: Gestión de estado local
-- **useContext**: Acceso a contexto global
-- **useEffect**: Efectos secundarios
-- **useNavigate**: Navegación programática
-
-### React Router
-- BrowserRouter: Enrutador principal
-- Routes: Definición de rutas
-- Navigate: Redirecciones
-
-### Context API
-- createContext: Crear contexto
-- Provider: Proveedor de contexto
-- useContext: Consumir contexto
-
-### localStorage
-- Persistencia de usuarios
-- Persistencia de sesión
-- Almacenamiento de datos simulados
-
-## 🎓 Aprendizajes y Arquitectura
-
-### Separación de Responsabilidades
-- **Pages**: Lógica de paginas y manejo de estado
-- **Components**: Componentes reutilizables sin lógica
-- **Services**: Acceso a datos y lógica de negocio
-- **Context**: Estado global
-
-### Props Drilling Alternativo
-En lugar de pasar props a través de múltiples niveles, usamos:
-- Context API para estado global (AuthContext)
-- Services para datos compartidos
-
-### Validación en Cliente
-Todas las validaciones ocurren en el cliente:
-- Validaciones en formularios antes de guardar
-- Mensajes de error claros
-- Feedback visual inmediato
-
-## 🚀 Próximas Mejoras
-
-- [ ] Integración con API real
-- [ ] Autenticación con JWT
-- [ ] Carga de documentos (fotos de vacunas)
-- [ ] Notificaciones push
-- [ ] Modo oscuro
-- [ ] Multiidioma
-- [ ] Exportar carnet PDF
-
-## 👥 Equipo de Desarrollo
-
-Este proyecto fue construido siguiendo los estándares de:
-- Arquitectura de componentes React
-- Gestión de estado con Hooks
-- Ruteo dinámico con React Router
-- Estilos modulares con CSS
-
-## 📄 Licencia
-
-Este proyecto es parte del programa académico de desarrollo web con React.
+Aplicación web desarrollada en **React + Vite** como proyecto integrador del segundo avance (Funcionalidad e Interactividad). Permite registrar usuarios, iniciar sesión, gestionar un carnet de vacunación digital, consultar centros médicos, revisar alertas de próximas dosis y descargar el historial en PDF. Todos los datos se persisten en **localStorage** (sin backend en esta etapa).
 
 ---
 
-**Última actualización**: Abril 2026  
-**Versión**: 1.0.0 (Hito 2 - Funcional)
+## 🚀 Instalación y ejecución
+
+```bash
+# 1. Instalar dependencias
+npm install
+
+# 2. Ejecutar en modo desarrollo
+npm run dev
+
+# 3. Abrir en el navegador
+# http://localhost:5173
+```
+
+---
+
+## 🗺️ Mapa de Rutas
+
+| Ruta | Componente | Tipo | Descripción |
+|---|---|---|---|
+| `/` | `HomePage` | Pública | Página de bienvenida |
+| `/login` | `LoginPage` | Pública | Inicio de sesión |
+| `/registro` | `RegistroPage` | Pública | Registro de nuevo usuario |
+| `/dashboard` | `DashboardPage` | **Privada** | Panel principal del usuario |
+| `/carnet` | `CarnetPage` | **Privada** | Carnet de vacunación y registro de vacunas |
+| `/centros` | `CentrosPage` | **Privada** | Listado de centros médicos |
+| `/alertas` | `AlertasPage` | **Privada** | Alertas de próximas dosis |
+| `/historial` | `HistorialPage` | **Privada** | Historial de PDFs generados |
+| `/*` | — | — | Redirige a `/` (404 catch-all) |
+
+---
+
+## 🔐 Protección de Rutas
+
+La protección se implementa mediante el componente envolvente `ProtectedRoute` ubicado en `src/components/ProtectedRoute.jsx`.
+
+### ¿Cómo funciona?
+
+```jsx
+// src/components/ProtectedRoute.jsx
+export const ProtectedRoute = ({ children }) => {
+  const { user, loading } = useContext(AuthContext)
+
+  if (loading) return <div>Cargando...</div>
+  if (!user)   return <Navigate to="/login" replace />
+
+  return children
+}
+```
+
+1. Lee el estado `user` del **AuthContext** (que a su vez lee `vax_token` y `vax_user` del localStorage al montar).
+2. Si `loading` es `true` muestra un indicador mientras restaura la sesión.
+3. Si `user` es `null` (no autenticado), redirige al `/login` con `<Navigate replace />`, impidiendo que el usuario vuelva atrás con el botón del navegador.
+4. Si `user` existe, renderiza el componente hijo normalmente.
+
+En `App.jsx` todas las rutas privadas se envuelven así:
+
+```jsx
+<Route path="/dashboard" element={
+  <ProtectedRoute>
+    <DashboardPage />
+  </ProtectedRoute>
+} />
+```
+
+---
+
+## 🏗️ Arquitectura del Proyecto
+
+```
+src/
+├── context/
+│   └── AuthContext.jsx       # Estado global de autenticación (Context + Provider)
+├── components/
+│   ├── Navbar.jsx            # Barra de navegación (recibe user via Context)
+│   └── ProtectedRoute.jsx    # Componente envolvente para rutas privadas
+├── pages/
+│   ├── HomePage.jsx          # Landing page pública
+│   ├── LoginPage.jsx         # HU06 – Inicio de sesión
+│   ├── RegistroPage.jsx      # HU05 – Registro de usuario
+│   ├── DashboardPage.jsx     # Panel principal con stats y edición de perfil
+│   ├── CarnetPage.jsx        # HU08/HU09 – Visualización y registro de vacunas
+│   ├── CentrosPage.jsx       # Listado de centros médicos
+│   ├── AlertasPage.jsx       # HU08 – Alertas de próximas dosis
+│   └── HistorialPage.jsx     # Historial de PDFs exportados
+├── services/
+│   └── index.js              # Mocks y lógica de datos (sin fetch aún)
+├── styles/                   # CSS por módulo
+├── App.jsx                   # Definición de rutas con React Router
+└── main.jsx                  # Punto de entrada
+```
+
+### Principio clave: datos centralizados en `services/`
+
+Ningún componente "quema" datos directamente. Todo fluye desde `src/services/index.js`, lo que permite que en el **Momento 3** solo sea necesario reemplazar las funciones locales por llamadas `fetch` con `useEffect`, sin tocar los componentes.
+
+---
+
+## 🔄 Flujo de Datos
+
+### Context API (AuthContext)
+El estado de autenticación (`user`, `token`, `loading`) se comparte globalmente a través de `AuthContext`. Cualquier componente puede consumirlo con `useContext(AuthContext)` sin necesidad de pasar props manualmente.
+
+```
+AuthProvider
+  └── Navbar          → lee user para mostrar nombre / botón logout
+  └── ProtectedRoute  → lee user para decidir si renderiza o redirige
+  └── DashboardPage   → lee user para mostrar info y llama updateProfile
+  └── CarnetPage      → lee user.idusuario para cargar/guardar carnet
+  └── AlertasPage     → lee user.idusuario para cargar alertas
+  └── HistorialPage   → lee user.idusuario para cargar historial
+```
+
+### Props
+Los datos cargados desde `services/` se pasan como props a los sub-elementos de UI dentro de cada página:
+
+```
+CarnetPage (estado: carnet[], vacunas[], centros[])
+  └── <table> → recibe filas mapeadas del array carnet
+  └── <select> → recibe vacunas[] y centros[] como options
+```
+
+---
+
+## 📦 Dependencias
+
+### Producción
+| Dependencia | Versión | Uso |
+|---|---|---|
+| `react` | ^18.2.0 | Librería principal |
+| `react-dom` | ^18.2.0 | Renderizado en el DOM |
+| `react-router-dom` | ^6.30.3 | Navegación dinámica entre páginas |
+| `jspdf` | ^2.5.2 | Generación y descarga de PDF del carnet |
+
+### Desarrollo
+| Dependencia | Versión | Uso |
+|---|---|---|
+| `vite` | ^4.3.9 | Bundler y servidor de desarrollo |
+| `@vitejs/plugin-react` | ^4.0.0 | Soporte JSX y Fast Refresh |
+
+---
+
+## 💾 Estructura del LocalStorage
+
+| Clave | Contenido |
+|---|---|
+| `vax_token` | Token de sesión simulado |
+| `vax_user` | Objeto del usuario autenticado |
+| `vax_usuarios` | Array de todos los usuarios registrados |
+| `vax_centros` | Catálogo de centros médicos (semilla) |
+| `vax_vacunas` | Catálogo de vacunas (semilla) |
+| `vax_carnet_{id}` | Registros de vacunación por usuario |
+| `vax_alertas_{id}` | Alertas de próximas dosis por usuario |
+| `vax_historial_{id}` | Historial de PDFs exportados por usuario |
+
+---
+
+## ✅ Historias de Usuario implementadas
+
+| HU | Descripción | Estado |
+|---|---|---|
+| HU05 | Registro de usuario (nombres, tipoDocumento, documento, edad) | ✅ |
+| HU06 | Inicio de sesión con validación de documento | ✅ |
+| HU07 | Rutas privadas protegidas con redirección al login | ✅ |
+| HU08 | Visualización de datos mediante props y listado dinámico | ✅ |
+| HU09 | Registro de vacunación con formulario controlado (useState) | ✅ |
+| HU10 | Cierre de sesión (logout) seguro | ✅ |
+| HU12 | Documentación técnica (este README) | ✅ |
+
+---
+
+## 🔮 Proyección al Momento 3
+
+El código está preparado para conectar el backend real con mínimos cambios:
+
+1. En `src/services/index.js`, reemplazar cada función local por un `fetch` a la API.
+2. En `src/context/AuthContext.jsx`, reemplazar la lógica de localStorage por llamadas a `/api/auth/login` y `/api/auth/registro`.
+3. Los nombres de todas las variables (`idusuario`, `tiposangre`, `fechanacimiento`, etc.) ya coinciden exactamente con el DTO del backend, por lo que no se requiere ningún mapeo adicional.

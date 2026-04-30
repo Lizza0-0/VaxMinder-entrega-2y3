@@ -122,3 +122,15 @@
     width: 100%;
   }
 }
+
+/* ── Badges de estado ───────────────────────────── */
+.alerta-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-top: 4px;
+}
+.alerta-badge.pendiente { background: #fef3c7; color: #92400e; }
+.alerta-badge.vista      { background: #d1fae5; color: #065f46; }

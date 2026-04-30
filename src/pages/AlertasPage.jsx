@@ -1,137 +1,63 @@
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
-import { alertasService, vacunasService } from '../services/index'
+import { alertasService } from '../services/index'
 import '../styles/alertas.css'
 
 export const AlertasPage = () => {
-  const { user } = useContext(AuthContext)
+  const { user }              = useContext(AuthContext)
   const [alertas, setAlertas] = useState([])
-  const [vacunas, setVacunas] = useState([])
-  const [showForm, setShowForm] = useState(false)
-  const [formData, setFormData] = useState({
-    vacunaId: '',
-    fechaProxima: ''
-  })
-  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [error, setError]     = useState('')
 
   useEffect(() => {
-    if (user) {
-      const alertasData = alertasService.obtenerAlertas(user.id)
-      setAlertas(alertasData)
-
-      const vacunasData = vacunasService.obtenerVacunas()
-      setVacunas(vacunasData)
+    if (!user) return
+    const cargar = async () => {
+      try {
+        const data = await alertasService.obtenerAlertas(user.idusuario)
+        setAlertas(data)
+      } catch {
+        setError('Error al cargar las alertas')
+      } finally {
+        setLoading(false)
+      }
     }
+    cargar()
   }, [user])
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
+  const fmt = (d) => d ? new Date(d).toLocaleDateString('es-ES', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  }) : '—'
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setError('')
+  const pendientes = alertas.filter(a => a.estado === 'pendiente')
+  const vistas     = alertas.filter(a => a.estado !== 'pendiente')
 
-    if (!formData.vacunaId || !formData.fechaProxima) {
-      setError('Todos los campos son requeridos')
-      return
-    }
-
-    const newAlerta = alertasService.crearAlerta(
-      user.id,
-      parseInt(formData.vacunaId),
-      formData.fechaProxima
-    )
-
-    setAlertas([...alertas, newAlerta])
-    setFormData({ vacunaId: '', fechaProxima: '' })
-    setShowForm(false)
-  }
-
-  const getNombreVacuna = (vacunaId) => {
-    const vacuna = vacunas.find(v => v.id === vacunaId)
-    return vacuna?.nombre || 'Desconocida'
-  }
-
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('es-ES')
-  }
-
-  const alertasNoLeidas = alertas.filter(a => !a.leida)
+  if (loading) return <div className="alertas-container"><p>Cargando alertas...</p></div>
 
   return (
     <div className="alertas-container">
       <div className="alertas-header">
-        <h1>Alertas de Vacunación</h1>
-        <p>Mantente al tanto de tus próximas vacunaciones</p>
-        <button 
-          className="btn-primary"
-          onClick={() => setShowForm(!showForm)}
-        >
-          {showForm ? 'Cancelar' : '+ Crear Alerta'}
-        </button>
+        <h1>Mis Alertas de Vacunacion</h1>
+        <p>El sistema genera tus alertas automaticamente cuando registras una vacunacion</p>
       </div>
 
-      {showForm && (
-        <div className="form-section">
-          <h2>Nueva Alerta de Vacunación</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="vacunaId">Vacuna *</label>
-                <select
-                  id="vacunaId"
-                  name="vacunaId"
-                  value={formData.vacunaId}
-                  onChange={handleChange}
-                >
-                  <option value="">Selecciona una vacuna</option>
-                  {vacunas.map(v => (
-                    <option key={v.id} value={v.id}>
-                      {v.nombre}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="form-group">
-                <label htmlFor="fechaProxima">Fecha Próxima *</label>
-                <input
-                  type="date"
-                  id="fechaProxima"
-                  name="fechaProxima"
-                  value={formData.fechaProxima}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            {error && <div className="error-message">{error}</div>}
-
-            <button type="submit" className="btn-primary">
-              Crear Alerta
-            </button>
-          </form>
-        </div>
-      )}
+      {error && <div className="error-message">{error}</div>}
 
       <div className="alertas-section">
-        <h2>Alertas Activas ({alertasNoLeidas.length})</h2>
-        {alertasNoLeidas.length === 0 ? (
+        <h2>Proximas dosis ({pendientes.length})</h2>
+        {pendientes.length === 0 ? (
           <div className="empty-state">
             <p>No tienes alertas pendientes</p>
+            <p className="hint">Al registrar una vacunacion con fecha de proxima dosis, el sistema genera la alerta automaticamente</p>
           </div>
         ) : (
           <div className="alertas-list">
-            {alertasNoLeidas.map(alerta => (
-              <div key={alerta.id} className="alerta-item">
+            {pendientes.map(a => (
+              <div key={a.idalerta} className="alerta-item">
                 <div className="alerta-icon">🔔</div>
                 <div className="alerta-content">
-                  <h3>{getNombreVacuna(alerta.vacunaId)}</h3>
-                  <p>Próxima fecha: {formatDate(alerta.fechaProxima)}</p>
+                  <h3>{a.mensaje}</h3>
+                  <p>Fecha programada: {fmt(a.fechaalerta)}</p>
+                  <span className="alerta-badge pendiente">Pendiente</span>
                 </div>
               </div>
             ))}
@@ -139,16 +65,17 @@ export const AlertasPage = () => {
         )}
       </div>
 
-      {alertas.filter(a => a.leida).length > 0 && (
+      {vistas.length > 0 && (
         <div className="alertas-section">
-          <h2>Alertas Vistas</h2>
+          <h2>Alertas anteriores</h2>
           <div className="alertas-list muted">
-            {alertas.filter(a => a.leida).map(alerta => (
-              <div key={alerta.id} className="alerta-item">
+            {vistas.map(a => (
+              <div key={a.idalerta} className="alerta-item">
                 <div className="alerta-icon">✓</div>
                 <div className="alerta-content">
-                  <h3>{getNombreVacuna(alerta.vacunaId)}</h3>
-                  <p>Fecha: {formatDate(alerta.fechaProxima)}</p>
+                  <h3>{a.mensaje}</h3>
+                  <p>Fecha: {fmt(a.fechaalerta)}</p>
+                  <span className="alerta-badge vista">Completada</span>
                 </div>
               </div>
             ))}

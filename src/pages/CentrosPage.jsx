@@ -4,44 +4,51 @@ import '../styles/centros.css'
 
 export const CentrosPage = () => {
   const [centros, setCentros] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError]     = useState('')
 
   useEffect(() => {
-    const centrosData = centrosService.obtenerCentros()
-    setCentros(centrosData)
+    const cargar = async () => {
+      try {
+        const data = await centrosService.obtenerCentros()
+        setCentros(data)
+      } catch {
+        setError('No se pudieron cargar los centros medicos')
+      } finally {
+        setLoading(false)
+      }
+    }
+    cargar()
   }, [])
+
+  if (loading) return <div className="centros-container"><p>Cargando centros...</p></div>
 
   return (
     <div className="centros-container">
       <div className="centros-header">
-        <h1>Centros Médicos</h1>
-        <p>Encuentra los centros de vacunación disponibles</p>
+        <h1>Centros Medicos</h1>
+        <p>Encuentra los centros de vacunacion disponibles</p>
       </div>
-
-      <div className="centros-grid">
-        {centros.map(centro => (
-          <div key={centro.id} className="centro-card">
-            <div className="centro-icon">🏥</div>
-            <h3>{centro.nombre}</h3>
-            <div className="centro-info">
-              <p>
-                <strong>📍 Ubicación:</strong><br/>
-                {centro.ubicacion}
-              </p>
-              <p>
-                <strong>📞 Teléfono:</strong><br/>
-                {centro.telefono}
-              </p>
-              <p>
-                <strong>⏰ Horario:</strong><br/>
-                {centro.horario}
-              </p>
+      {error && <div className="error-message">{error}</div>}
+      {centros.length === 0 ? (
+        <div className="empty-state"><p>No hay centros medicos registrados en la base de datos</p></div>
+      ) : (
+        <div className="centros-grid">
+          {centros.map(centro => (
+            <div key={centro.idcentro} className="centro-card">
+              <div className="centro-icon">🏥</div>
+              <h3>{centro.nombrecentro}</h3>
+              <div className="centro-info">
+                <p><strong>Direccion:</strong><br/>{centro.direccion}</p>
+                <p><strong>Ciudad:</strong><br/>{centro.ciudad}</p>
+                <p><strong>Telefono:</strong><br/>{centro.telefono || 'No disponible'}</p>
+                <p><strong>Tipo:</strong><br/>{centro.tipocentro || 'General'}</p>
+              </div>
+              <button className="btn-secondary">Contactar</button>
             </div>
-            <button className="btn-secondary">
-              Contactar
-            </button>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
