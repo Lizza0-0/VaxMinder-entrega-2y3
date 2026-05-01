@@ -171,10 +171,10 @@ export const CarnetPage = () => {
     setError('')
     setSuccess('')
     if (!formData.vacunaId)       { setError('Selecciona una vacuna'); return }
-    if (!formData.dosis)          { setError('Ingresa el numero de dosis'); return }
+    if (!formData.dosis)          { setError('Ingresa el número de dosis'); return }
     if (!formData.lote.trim())    { setError('Ingresa el lote de la vacuna'); return }
-    if (!formData.fecha)          { setError('Ingresa la fecha de aplicacion'); return }
-    if (!formData.fechaProxima)   { setError('Ingresa la fecha de proxima dosis'); return }
+    if (!formData.fecha)          { setError('Ingresa la fecha de aplicación'); return }
+    if (!formData.fechaProxima)   { setError('Ingresa la fecha de próxima dosis'); return }
 
     setSaving(true)
     try {
@@ -190,9 +190,9 @@ export const CarnetPage = () => {
       setCarnet(prev => [...prev, nueva])
       setFormData({ vacunaId: '', dosis: '', lote: '', centroId: '', fecha: '', fechaProxima: '', observaciones: '' })
       setShowForm(false)
-      setSuccess('Vacunacion registrada correctamente. Se genero una alerta para tu proxima dosis.')
+      setSuccess('Vacunación registrada correctamente. Se generó una alerta para tu próxima dosis.')
     } catch {
-      setError('Error al guardar la vacunacion')
+      setError('Error al guardar la vacunación')
     } finally {
       setSaving(false)
     }
@@ -274,7 +274,7 @@ export const CarnetPage = () => {
 
       {showForm && (
         <div className="form-section">
-          <h2>Registrar Nueva Vacunacion</h2>
+          <h2>Registrar Nueva Vacunación</h2>
           <p className="section-hint">Una vez guardado, el registro no puede modificarse.</p>
           <form onSubmit={handleSubmit}>
             <div className="form-row">
@@ -290,7 +290,7 @@ export const CarnetPage = () => {
                 </select>
               </div>
               <div className="form-group">
-                <label htmlFor="dosis">Numero de dosis *</label>
+                <label htmlFor="dosis">Número de Dosis *</label>
                 <input type="number" id="dosis" name="dosis" value={formData.dosis}
                   onChange={handleChange} placeholder="1" min="1" max="10" />
               </div>
@@ -302,7 +302,7 @@ export const CarnetPage = () => {
                   onChange={handleChange} placeholder="Ej: LOT2026-96" />
               </div>
               <div className="form-group">
-                <label htmlFor="centroId">Centro medico</label>
+                <label htmlFor="centroId">Centro Médico</label>
                 <select id="centroId" name="centroId" value={formData.centroId} onChange={handleChange}>
                   <option value="">-- Selecciona un centro (opcional) --</option>
                   {centros.map(c => (
@@ -313,11 +313,11 @@ export const CarnetPage = () => {
             </div>
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="fecha">Fecha de aplicacion *</label>
+                <label htmlFor="fecha">Fecha de Aplicación *</label>
                 <input type="date" id="fecha" name="fecha" value={formData.fecha} onChange={handleChange} />
               </div>
               <div className="form-group">
-                <label htmlFor="fechaProxima">Fecha proxima dosis *</label>
+                <label htmlFor="fechaProxima">Fecha Próxima Dosis *</label>
                 <input type="date" id="fechaProxima" name="fechaProxima"
                   value={formData.fechaProxima} onChange={handleChange} />
               </div>
@@ -341,7 +341,7 @@ export const CarnetPage = () => {
         {carnet.length === 0 ? (
           <div className="empty-state">
             <p>No hay vacunaciones registradas</p>
-            <p className="hint">Registra tu primera vacunacion para mantener tu carnet actualizado</p>
+            <p className="hint">Registra tu primera vacunación para mantener tu carnet actualizado</p>
           </div>
         ) : (
           <div className="carnet-table-container">

@@ -36,18 +36,18 @@ export const AlertasPage = () => {
   return (
     <div className="alertas-container">
       <div className="alertas-header">
-        <h1>Mis Alertas de Vacunacion</h1>
-        <p>El sistema genera tus alertas automaticamente cuando registras una vacunacion</p>
+        <h1>Mis Alertas de Vacunación</h1>
+        <p>El sistema genera tus alertas automáticamente cuando registras una vacunación</p>
       </div>
 
       {error && <div className="error-message">{error}</div>}
 
       <div className="alertas-section">
-        <h2>Proximas dosis ({pendientes.length})</h2>
+        <h2>Próximas dosis ({pendientes.length})</h2>
         {pendientes.length === 0 ? (
           <div className="empty-state">
             <p>No tienes alertas pendientes</p>
-            <p className="hint">Al registrar una vacunacion con fecha de proxima dosis, el sistema genera la alerta automaticamente</p>
+            <p className="hint">Al registrar una vacunación con fecha de próxima dosis, el sistema genera la alerta automáticamente</p>
           </div>
         ) : (
           <div className="alertas-list">

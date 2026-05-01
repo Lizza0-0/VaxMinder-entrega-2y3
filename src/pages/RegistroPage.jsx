@@ -23,17 +23,17 @@ export const RegistroPage = () => {
     e.preventDefault()
     setError('')
     setLoading(true)
-    if (!formData.tipoDocumento)         { setError('El tipoDocumento es requerido');          setLoading(false); return }
-    if (!formData.idusuario.trim())      { setError('El idusuario es requerido');              setLoading(false); return }
+    if (!formData.tipoDocumento)         { setError('El tipo de documento es requerido');      setLoading(false); return }
+    if (!formData.idusuario.trim())      { setError('El número de documento es requerido');    setLoading(false); return }
     if (!formData.nombre.trim())         { setError('El nombre es requerido');                 setLoading(false); return }
     if (!formData.apellido.trim())       { setError('El apellido es requerido');               setLoading(false); return }
     if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setError('Ingresa un correo valido'); setLoading(false); return }
+      setError('Ingresa un correo válido'); setLoading(false); return }
     if (!formData.contrasena || formData.contrasena.length < 6) {
-      setError('La contrasena debe tener al menos 6 caracteres'); setLoading(false); return }
-    if (!formData.fechanacimiento)       { setError('La fechanacimiento es requerida');        setLoading(false); return }
-    if (!formData.tiposangre)            { setError('El tiposangre es requerido');             setLoading(false); return }
-    if (!formData.telefono.trim())       { setError('El telefono es requerido');               setLoading(false); return }
+      setError('La contraseña debe tener al menos 6 caracteres'); setLoading(false); return }
+    if (!formData.fechanacimiento)       { setError('La fecha de nacimiento es requerida');    setLoading(false); return }
+    if (!formData.tiposangre)            { setError('El tipo de sangre es requerido');         setLoading(false); return }
+    if (!formData.telefono.trim())       { setError('El teléfono es requerido');               setLoading(false); return }
 
     const result = await register({ ...formData, idusuario: parseInt(formData.idusuario) })
     if (result.success) { navigate('/dashboard') } else { setError(result.message) }
@@ -49,7 +49,7 @@ export const RegistroPage = () => {
           {/* tipoDocumento + idusuario */}
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="tipoDocumento">tipoDocumento *</label>
+              <label htmlFor="tipoDocumento">Tipo de Documento *</label>
               <select id="tipoDocumento" name="tipoDocumento" value={formData.tipoDocumento}
                 onChange={handleChange} disabled={loading}>
                 <option value="">Seleccionar...</option>
@@ -59,7 +59,7 @@ export const RegistroPage = () => {
               </select>
             </div>
             <div className="form-group">
-              <label htmlFor="idusuario">idusuario *</label>
+              <label htmlFor="idusuario">Número de Documento *</label>
               <input type="text" id="idusuario" name="idusuario" value={formData.idusuario}
                 onChange={handleChange} placeholder="1234567890" disabled={loading} />
             </div>
@@ -67,12 +67,12 @@ export const RegistroPage = () => {
           {/* nombre + apellido */}
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="nombre">nombre *</label>
+              <label htmlFor="nombre">Nombre *</label>
               <input type="text" id="nombre" name="nombre" value={formData.nombre}
                 onChange={handleChange} placeholder="Ana Maria" disabled={loading} />
             </div>
             <div className="form-group">
-              <label htmlFor="apellido">apellido *</label>
+              <label htmlFor="apellido">Apellido *</label>
               <input type="text" id="apellido" name="apellido" value={formData.apellido}
                 onChange={handleChange} placeholder="Garcia Lopez" disabled={loading} />
             </div>
@@ -80,12 +80,12 @@ export const RegistroPage = () => {
           {/* email + contrasena */}
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="email">email *</label>
+              <label htmlFor="email">Correo Electrónico *</label>
               <input type="email" id="email" name="email" value={formData.email}
                 onChange={handleChange} placeholder="correo@ejemplo.com" disabled={loading} />
             </div>
             <div className="form-group">
-              <label htmlFor="contrasena">contrasena *</label>
+              <label htmlFor="contrasena">Contraseña *</label>
               <input type="password" id="contrasena" name="contrasena" value={formData.contrasena}
                 onChange={handleChange} placeholder="Minimo 6 caracteres" disabled={loading} />
             </div>
@@ -93,12 +93,12 @@ export const RegistroPage = () => {
           {/* fechanacimiento + tiposangre */}
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="fechanacimiento">fechanacimiento *</label>
+              <label htmlFor="fechanacimiento">Fecha de Nacimiento *</label>
               <input type="date" id="fechanacimiento" name="fechanacimiento"
                 value={formData.fechanacimiento} onChange={handleChange} disabled={loading} />
             </div>
             <div className="form-group">
-              <label htmlFor="tiposangre">tiposangre *</label>
+              <label htmlFor="tiposangre">Tipo de Sangre *</label>
               <select id="tiposangre" name="tiposangre" value={formData.tiposangre}
                 onChange={handleChange} disabled={loading}>
                 <option value="">Seleccionar...</option>
@@ -112,7 +112,7 @@ export const RegistroPage = () => {
           {/* telefono */}
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="telefono">telefono *</label>
+              <label htmlFor="telefono">Teléfono *</label>
               <input type="tel" id="telefono" name="telefono" value={formData.telefono}
                 onChange={handleChange} placeholder="300 123 4567" disabled={loading} />
             </div>

@@ -47,10 +47,10 @@ export const DashboardPage = () => {
     setUpdateSuccess('')
     setSaving(true)
     if (!editData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(editData.email)) {
-      setUpdateError('El correo electronico no es valido'); setSaving(false); return
+      setUpdateError('El correo electrónico no es válido'); setSaving(false); return
     }
     if (!editData.telefono.trim()) {
-      setUpdateError('El telefono es requerido'); setSaving(false); return
+      setUpdateError('El teléfono es requerido'); setSaving(false); return
     }
     const result = await updateProfile({
       email:    editData.email.trim(),
@@ -61,7 +61,7 @@ export const DashboardPage = () => {
       setUpdateSuccess('Datos actualizados correctamente')
       setEditData(prev => ({ ...prev, contrasena: '' }))
     } else {
-      setUpdateError(result.message || 'No se pudo actualizar la informacion')
+      setUpdateError(result.message || 'No se pudo actualizar la información')
     }
     setSaving(false)
   }
@@ -81,7 +81,7 @@ export const DashboardPage = () => {
     <div className="dashboard-container">
       <div className="dashboard-header">
         <h1>Bienvenido, {user?.nombre}!</h1>
-        <p>Tu carnet de vacunacion digital</p>
+        <p>Tu carnet de vacunación digital</p>
       </div>
 
       <div className="dashboard-grid">
@@ -99,26 +99,26 @@ export const DashboardPage = () => {
         </div>
         <div className="stat-card clickable" onClick={() => goToSection('informacion-personal')}>
           <div className="stat-icon">👤</div>
-          <div className="stat-content"><h3>{user?.edad ?? '—'}</h3><p>Anos</p></div>
+          <div className="stat-content"><h3>{user?.edad ?? '—'}</h3><p>Años</p></div>
         </div>
       </div>
 
       <div id="informacion-personal" className="dashboard-section">
-        <h2>Informacion Personal</h2>
+        <h2>Información Personal</h2>
         <div className="info-grid">
           <div className="info-item"><label>Nombre completo</label><p>{user?.nombre} {user?.apellido}</p></div>
-          <div className="info-item"><label>tipoDocumento</label><p>{user?.tipoDocumento || '—'}</p></div>
-          <div className="info-item"><label>idusuario</label><p>{user?.idusuario}</p></div>
-          <div className="info-item"><label>fechanacimiento</label><p>{fmt(user?.fechanacimiento)}</p></div>
-          <div className="info-item"><label>tiposangre</label><p>{user?.tiposangre}</p></div>
-          <div className="info-item"><label>Email</label><p>{user?.email}</p></div>
-          <div className="info-item"><label>Telefono</label><p>{user?.telefono}</p></div>
+          <div className="info-item"><label>Tipo de Documento</label><p>{user?.tipoDocumento || '—'}</p></div>
+          <div className="info-item"><label>Número de Documento</label><p>{user?.idusuario}</p></div>
+          <div className="info-item"><label>Fecha de Nacimiento</label><p>{fmt(user?.fechanacimiento)}</p></div>
+          <div className="info-item"><label>Tipo de Sangre</label><p>{user?.tiposangre}</p></div>
+          <div className="info-item"><label>Correo Electrónico</label><p>{user?.email}</p></div>
+          <div className="info-item"><label>Teléfono</label><p>{user?.telefono}</p></div>
         </div>
       </div>
 
       {sugeridas.length > 0 && (
         <div id="vacunas-recomendadas" className="dashboard-section">
-          <h2>Vacunas recomendadas para tu edad ({user?.edad} anos)</h2>
+          <h2>Vacunas recomendadas para tu edad ({user?.edad} años)</h2>
           <div className="sugeridas-grid">
             {sugeridas.map(v => (
               <div key={v.id_vacuna} className="sugerida-card">
@@ -136,23 +136,23 @@ export const DashboardPage = () => {
 
       <div className="dashboard-section">
         <h2>Editar datos de contacto</h2>
-        <p className="section-hint">La cedula y la fecha de nacimiento no pueden modificarse.</p>
+        <p className="section-hint">La cédula y la fecha de nacimiento no pueden modificarse.</p>
         <form onSubmit={handleUpdate} className="edit-profile-form">
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="email">Correo electronico</label>
+              <label htmlFor="email">Correo Electrónico</label>
               <input type="email" id="email" name="email" value={editData.email}
                 onChange={handleEditChange} placeholder="correo@ejemplo.com" disabled={saving} />
             </div>
             <div className="form-group">
-              <label htmlFor="telefono">Telefono</label>
+              <label htmlFor="telefono">Teléfono</label>
               <input type="tel" id="telefono" name="telefono" value={editData.telefono}
                 onChange={handleEditChange} placeholder="300 123 4567" disabled={saving} />
             </div>
           </div>
           <div className="form-row">
             <div className="form-group full-width">
-              <label htmlFor="contrasena">Nueva contrasena</label>
+              <label htmlFor="contrasena">Nueva Contraseña</label>
               <input type="password" id="contrasena" name="contrasena" value={editData.contrasena}
                 onChange={handleEditChange} placeholder="Dejar en blanco para no cambiar" disabled={saving} />
             </div>
