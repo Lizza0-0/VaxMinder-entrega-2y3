@@ -18,7 +18,9 @@ export const LoginPage = () => {
     if (!idusuario.trim()) { setError('Por favor ingresa tu número de documento'); setLoading(false); return }
     if (!contrasena.trim()) { setError('Por favor ingresa tu contraseña'); setLoading(false); return }
     const result = await login(idusuario.trim(), contrasena)
-    if (result.success) { navigate('/dashboard') } else { setError(result.message) }
+    if (result.success) {
+      navigate(result.rol === 'admin' ? '/admin' : '/dashboard')
+    } else { setError(result.message) }
     setLoading(false)
   }
 

@@ -31,7 +31,7 @@
 }
 
 .btn-secondary:hover {
-  background: rgba(16, 185, 129, 0.1);
+  background: var(--primary-light);
 }
 
 .page-subtitle {
@@ -52,11 +52,12 @@
 }
 
 .summary-card {
-  background: linear-gradient(180deg, #0f766e 0%, #10b981 100%);
+  background: #1a3a5c;
   border-radius: 1rem;
   color: white;
   padding: 1.5rem;
   box-shadow: var(--shadow-lg);
+  border-top: 4px solid var(--primary-color);
 }
 
 .summary-header {
@@ -80,6 +81,7 @@
 .summary-card h2 {
   margin: 0;
   font-size: 1.45rem;
+  color: white;
 }
 
 .summary-code {
@@ -97,17 +99,19 @@
 }
 
 .summary-label {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.8);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: 0.25rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
+  font-weight: 600;
 }
 
 .summary-grid p {
   margin: 0;
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   font-weight: 500;
+  color: white;
 }
 
 .btn-secondary:hover {

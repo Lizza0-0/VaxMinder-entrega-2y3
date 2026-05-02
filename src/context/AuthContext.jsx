@@ -25,6 +25,31 @@ const getUsuarios = () => {
 const setUsuarios = (lista) =>
   localStorage.setItem('vax_usuarios', JSON.stringify(lista))
 
+// ─── Seed admin ──────────────────────────────────────────────────────────────
+
+const initAdmin = () => {
+  const usuarios = getUsuarios()
+  const adminExiste = usuarios.find(u => u.rol === 'admin')
+  if (!adminExiste) {
+    const admin = {
+      idusuario:       999999999,
+      nombre:          'Admin',
+      apellido:        'VaxMinder',
+      email:           'admin@vaxminder.com',
+      contrasena:      'admin123',
+      fechanacimiento: '1990-01-01',
+      tiposangre:      'O+',
+      telefono:        '3001234567',
+      tipoDocumento:   'CC',
+      fecharegistro:   '2024-01-01',
+      rol:             'admin'
+    }
+    setUsuarios([...usuarios, admin])
+  }
+}
+
+initAdmin()
+
 // ─── Provider ────────────────────────────────────────────────────────────────
 
 export const AuthProvider = ({ children }) => {
@@ -43,8 +68,6 @@ export const AuthProvider = ({ children }) => {
     setLoading(false)
   }, [])
 
-  // guardarSesion — usa exactamente los campos del backend UsuarioResponseDTO:
-  // idusuario, nombre, apellido, email, fechanacimiento, tiposangre, telefono, fecharegistro
   const guardarSesion = (nuevoToken, usuarioBackend) => {
     const conEdad = {
       idusuario:       usuarioBackend.idusuario,
@@ -56,6 +79,7 @@ export const AuthProvider = ({ children }) => {
       telefono:        usuarioBackend.telefono,
       fecharegistro:   usuarioBackend.fecharegistro,
       tipoDocumento:   usuarioBackend.tipoDocumento || '',
+      rol:             usuarioBackend.rol || 'usuario',
       edad:            calcularEdad(usuarioBackend.fechanacimiento)
     }
     setToken(nuevoToken)
@@ -64,22 +88,17 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('vax_user', JSON.stringify(conEdad))
   }
 
-  // registro — recibe campos exactos del UsuarioRegistroDTO:
-  // idusuario, nombre, apellido, email, contrasena, fechanacimiento, tiposangre, telefono
-  // + tipoDocumento (campo de front para el segundo entregable)
   const register = async (formData) => {
     try {
       const usuarios = getUsuarios()
       const existe = usuarios.find(u => Number(u.idusuario) === Number(formData.idusuario))
       if (existe) return { success: false, message: 'Ya existe un usuario con ese número de documento' }
 
-      // Validar tipoDocumento
       const tipoDoc = formData.tipoDocumento || ''
       if (!tipoDoc) return { success: false, message: 'El tipo de documento es requerido' }
       if (!['CC', 'TI', 'RC'].includes(tipoDoc))
-        return { success: false, message: 'Tipo de documento no valido. Opciones: CC, TI, RC' }
+        return { success: false, message: 'Tipo de documento no válido. Opciones: CC, TI, RC' }
 
-      // Mayores de 18 años deben usar obligatoriamente CC
       const hoy = new Date()
       const nac = new Date(formData.fechanacimiento)
       let edad = hoy.getFullYear() - nac.getFullYear()
@@ -98,7 +117,8 @@ export const AuthProvider = ({ children }) => {
         tiposangre:      formData.tiposangre,
         telefono:        formData.telefono,
         tipoDocumento:   tipoDoc,
-        fecharegistro:   new Date().toISOString().slice(0, 10)
+        fecharegistro:   new Date().toISOString().slice(0, 10),
+        rol:             'usuario'
       }
       setUsuarios([...usuarios, nuevoUsuario])
 
@@ -110,7 +130,6 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  // login — recibe idusuario y contrasena (campos del LoginDTO)
   const login = async (idusuario, contrasena) => {
     try {
       const usuarios = getUsuarios()
@@ -121,13 +140,12 @@ export const AuthProvider = ({ children }) => {
 
       const nuevoToken = generarToken(usuario.idusuario)
       guardarSesion(nuevoToken, usuario)
-      return { success: true }
+      return { success: true, rol: usuario.rol || 'usuario' }
     } catch {
       return { success: false, message: 'Error al iniciar sesión' }
     }
   }
 
-  // updateProfile — actualiza email, telefono y opcionalmente contrasena
   const updateProfile = async (updates) => {
     try {
       const usuarios = getUsuarios()

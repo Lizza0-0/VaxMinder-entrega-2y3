@@ -142,6 +142,62 @@ export const alertasService = {
   }
 }
 
+// ─── adminService ─────────────────────────────────────────────────────────────
+
+export const adminService = {
+  obtenerUsuarios: async () => {
+    await delay()
+    const usuarios = getLS('vax_usuarios', [])
+    return usuarios.filter(u => u.rol !== 'admin')
+  },
+
+  actualizarUsuario: async (idusuario, updates) => {
+    await delay()
+    const usuarios = getLS('vax_usuarios', [])
+    const idx = usuarios.findIndex(u => Number(u.idusuario) === Number(idusuario))
+    if (idx === -1) throw new Error('Usuario no encontrado')
+    usuarios[idx] = { ...usuarios[idx], ...updates }
+    setLS('vax_usuarios', usuarios)
+    return usuarios[idx]
+  },
+
+  agregarVacuna: async (vacuna) => {
+    await delay()
+    const vacunas = getLS('vax_vacunas', [])
+    const nueva = { ...vacuna, idvacuna: Date.now() }
+    setLS('vax_vacunas', [...vacunas, nueva])
+    return nueva
+  },
+
+  actualizarVacuna: async (idvacuna, updates) => {
+    await delay()
+    const vacunas = getLS('vax_vacunas', [])
+    const idx = vacunas.findIndex(v => v.idvacuna === idvacuna)
+    if (idx === -1) throw new Error('Vacuna no encontrada')
+    vacunas[idx] = { ...vacunas[idx], ...updates }
+    setLS('vax_vacunas', vacunas)
+    return vacunas[idx]
+  },
+
+  agregarCentro: async (centro) => {
+    await delay()
+    const centros = getLS('vax_centros', [])
+    const nuevo = { ...centro, idcentro: Date.now() }
+    setLS('vax_centros', [...centros, nuevo])
+    return nuevo
+  },
+
+  actualizarCentro: async (idcentro, updates) => {
+    await delay()
+    const centros = getLS('vax_centros', [])
+    const idx = centros.findIndex(c => c.idcentro === idcentro)
+    if (idx === -1) throw new Error('Centro no encontrado')
+    centros[idx] = { ...centros[idx], ...updates }
+    setLS('vax_centros', centros)
+    return centros[idx]
+  }
+}
+
 // ─── historialService ─────────────────────────────────────────────────────────
 
 export const historialService = {

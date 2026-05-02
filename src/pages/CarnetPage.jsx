@@ -5,19 +5,14 @@ import { carnetService, vacunasService, centrosService, historialService } from 
 import '../styles/carnet.css'
 
 export const CarnetPage = () => {
-  const { user }                = useContext(AuthContext)
-  const [carnet, setCarnet]     = useState([])
-  const [vacunas, setVacunas]   = useState([])
-  const [centros, setCentros]   = useState([])
-  const [showForm, setShowForm] = useState(false)
-  const [loading, setLoading]   = useState(true)
-  const [saving, setSaving]     = useState(false)
+  const { user }                  = useContext(AuthContext)
+  const [carnet, setCarnet]       = useState([])
+  const [vacunas, setVacunas]     = useState([])
+  const [centros, setCentros]     = useState([])
+  const [loading, setLoading]     = useState(true)
   const [exporting, setExporting] = useState(false)
-  const [error, setError]       = useState('')
-  const [success, setSuccess]   = useState('')
-  const [formData, setFormData] = useState({
-    vacunaId: '', dosis: '', lote: '', centroId: '', fecha: '', fechaProxima: '', observaciones: ''
-  })
+  const [error, setError]         = useState('')
+  const [success, setSuccess]     = useState('')
 
   useEffect(() => {
     if (!user) return
@@ -40,48 +35,36 @@ export const CarnetPage = () => {
     cargar()
   }, [user])
 
-  const getVacunaId = (vacuna) => vacuna?.id_vacuna ?? vacuna?.idvacuna
-  const getVacunaNombre = (vacuna) => vacuna?.nombre_vacuna ?? vacuna?.nombrevacuna
-  const getCentroId = (centro) => centro?.id_centro ?? centro?.idcentro
-  const getCentroNombre = (centro) => centro?.nombre_centro ?? centro?.nombrecentro
-  const getRegistroValue = (registro, ...keys) => keys.reduce((value, key) => value ?? registro?.[key], undefined)
+  const getVacunaId     = (v) => v?.id_vacuna   ?? v?.idvacuna
+  const getVacunaNombre = (v) => v?.nombre_vacuna ?? v?.nombrevacuna
+  const getCentroId     = (c) => c?.id_centro    ?? c?.idcentro
+  const getCentroNombre = (c) => c?.nombre_centro ?? c?.nombrecentro
+  const getVal          = (r, ...keys) => keys.reduce((val, k) => val ?? r?.[k], undefined)
 
   const findVacunaById = (id) => vacunas.find(v => String(getVacunaId(v)) === String(id))
 
-  // Al seleccionar vacuna, auto-calcular dosis sugerida
-  const handleVacunaChange = (e) => {
-    const id = e.target.value
-    const vacuna = findVacunaById(id)
-    const dosisYaAplicadas = carnet.filter(r => {
-      const idV = getRegistroValue(r, 'id_vacuna', 'idvacuna')
-      return String(idV) === String(id)
-    }).length
-    setFormData(prev => ({
-      ...prev,
-      vacunaId: id,
-      dosis: String(dosisYaAplicadas + 1)
-    }))
+  const getNombreVacuna = (idVacuna) => {
+    const id = idVacuna?.id_vacuna ?? idVacuna?.idvacuna ?? idVacuna
+    return getVacunaNombre(findVacunaById(id)) || 'Desconocida'
   }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+  const getNombreCentro = (idCentro) => {
+    const id = idCentro?.id_centro ?? idCentro?.idcentro ?? idCentro
+    const centro = centros.find(c => String(getCentroId(c)) === String(id))
+    return getCentroNombre(centro)
   }
+
+  const fmt = (d) => d ? new Date(d).toLocaleDateString('es-ES') : '—'
 
   const exportCarnetPdf = async () => {
-    if (!carnet.length) {
-      setError('No hay registros para exportar')
-      return
-    }
-
+    if (!carnet.length) { setError('No hay registros para exportar'); return }
     setError('')
     setSuccess('')
     setExporting(true)
-
     try {
-      const doc = new jsPDF({ unit: 'mm', format: 'a4' })
+      const doc       = new jsPDF({ unit: 'mm', format: 'a4' })
       const pageWidth = doc.internal.pageSize.getWidth()
-      const margin = 14
+      const margin    = 14
 
       doc.setFillColor(1, 99, 83)
       doc.rect(0, 0, pageWidth, 32, 'F')
@@ -93,19 +76,19 @@ export const CarnetPage = () => {
       doc.setFontSize(10)
       doc.text(`Generado: ${new Date().toLocaleDateString('es-ES')}`, pageWidth - margin, 27, { align: 'right' })
 
-      const userDetailsTop = 42
+      const top = 42
       doc.setFillColor(241, 245, 249)
-      doc.roundedRect(margin, userDetailsTop, pageWidth - margin * 2, 32, 4, 4, 'F')
+      doc.roundedRect(margin, top, pageWidth - margin * 2, 32, 4, 4, 'F')
       doc.setTextColor(33)
       doc.setFontSize(10)
-      doc.text(`Paciente: ${(user?.nombre || user?.nombres) ?? ''} ${(user?.apellido || user?.apellidos) ?? ''}`, margin + 2, userDetailsTop + 8)
-      doc.text(`Cédula: ${user?.idusuario ?? ''}`, margin + 2, userDetailsTop + 15)
-      doc.text(`Tipo de sangre: ${(user?.tipoSangre ?? user?.tiposangre) || '—'}`, margin + 2, userDetailsTop + 22)
-      doc.text(`Nacimiento: ${fmt(user?.fechanacimiento)}`, pageWidth / 2 + 10, userDetailsTop + 8)
-      doc.text(`Edad: ${user?.edad ?? '—'} años`, pageWidth / 2 + 10, userDetailsTop + 15)
-      doc.text(`Email: ${user?.email ?? '—'}`, pageWidth / 2 + 10, userDetailsTop + 22)
+      doc.text(`Paciente: ${user?.nombre ?? ''} ${user?.apellido ?? ''}`, margin + 2, top + 8)
+      doc.text(`Cédula: ${user?.idusuario ?? ''}`, margin + 2, top + 15)
+      doc.text(`Tipo de sangre: ${user?.tiposangre || '—'}`, margin + 2, top + 22)
+      doc.text(`Nacimiento: ${fmt(user?.fechanacimiento)}`, pageWidth / 2 + 10, top + 8)
+      doc.text(`Edad: ${user?.edad ?? '—'} años`, pageWidth / 2 + 10, top + 15)
+      doc.text(`Email: ${user?.email ?? '—'}`, pageWidth / 2 + 10, top + 22)
 
-      let y = userDetailsTop + 46
+      let y = top + 46
       doc.setFontSize(12)
       doc.setTextColor(1, 99, 83)
       doc.text('Registro de vacunas aplicadas', margin, y)
@@ -113,44 +96,39 @@ export const CarnetPage = () => {
 
       doc.setFontSize(10)
       carnet.forEach((registro) => {
-        const nombre = getNombreVacuna(registro.id_vacuna ?? registro.idvacuna)
-        const fecha = fmt(getRegistroValue(registro, 'fechaaplicacion', 'fecha_aplicacion'))
-        const dosis = getRegistroValue(registro, 'numerodosis', 'numero_dosis')
-        const lote = getRegistroValue(registro, 'lotevacuna', 'lote_vacuna')
-        const centro = getNombreCentro(registro.idcentromedico ?? registro.id_centro_medico) || '—'
-        const proxima = fmt(getRegistroValue(registro, 'proximadosisfecha', 'proxima_dosis_fecha', 'fecha_proxima', 'fechaproxima'))
-        const observaciones = registro.observaciones || '—'
+        const nombre    = getNombreVacuna(registro.id_vacuna ?? registro.idvacuna)
+        const fecha     = fmt(getVal(registro, 'fechaaplicacion', 'fecha_aplicacion'))
+        const dosis     = getVal(registro, 'numerodosis', 'numero_dosis')
+        const lote      = getVal(registro, 'lotevacuna', 'lote_vacuna')
+        const centro    = getNombreCentro(registro.idcentromedico ?? registro.id_centro_medico) || '—'
+        const proxima   = fmt(getVal(registro, 'proximadosisfecha', 'proxima_dosis_fecha', 'fecha_proxima', 'fechaproxima'))
+        const obs       = registro.observaciones || '—'
+        const blockH    = 42
 
-        const blockHeight = 42
-        if (y + blockHeight > 282) {
-          doc.addPage()
-          y = 20
-        }
+        if (y + blockH > 282) { doc.addPage(); y = 20 }
 
         doc.setFillColor(241, 245, 249)
-        doc.roundedRect(margin, y, pageWidth - margin * 2, blockHeight, 4, 4, 'F')
+        doc.roundedRect(margin, y, pageWidth - margin * 2, blockH, 4, 4, 'F')
         doc.setTextColor(1, 99, 83)
         doc.setFontSize(10)
         doc.text(`Vacuna: ${nombre}`, margin + 3, y + 8)
-
         doc.setFontSize(9)
         doc.setTextColor(33)
-        doc.text(`Fecha aplicación: ${fecha}`, margin + 3, y + 15)
-        doc.text(`Centro de aplicación: ${centro}`, margin + 3, y + 21)
-        doc.text(`Próxima dosis: ${proxima}`, margin + 3, y + 27)
-        doc.text(`Dosis: ${dosis}`, pageWidth / 2 + 10, y + 15)
-        doc.text(`Lote: ${lote || '—'}`, pageWidth / 2 + 10, y + 21)
-        doc.text(`Observaciones: ${observaciones}`, margin + 3, y + 34, { maxWidth: pageWidth - margin * 4 })
-
-        y += blockHeight + 6
+        doc.text(`Fecha aplicación: ${fecha}`,         margin + 3,          y + 15)
+        doc.text(`Centro de aplicación: ${centro}`,    margin + 3,          y + 21)
+        doc.text(`Próxima dosis: ${proxima}`,           margin + 3,          y + 27)
+        doc.text(`Dosis: ${dosis}`,                     pageWidth / 2 + 10,  y + 15)
+        doc.text(`Lote: ${lote || '—'}`,                pageWidth / 2 + 10,  y + 21)
+        doc.text(`Observaciones: ${obs}`,               margin + 3,          y + 34, { maxWidth: pageWidth - margin * 4 })
+        y += blockH + 6
       })
 
       const filename = `carnet_${user?.idusuario ?? 'usuario'}_${new Date().toISOString().slice(0, 10)}.pdf`
-      const pdfBlob = doc.output('blob')
-      const url = URL.createObjectURL(pdfBlob)
-      const link = document.createElement('a')
-      link.href = url
-      link.download = filename
+      const pdfBlob  = doc.output('blob')
+      const url      = URL.createObjectURL(pdfBlob)
+      const link     = document.createElement('a')
+      link.href      = url
+      link.download  = filename
       document.body.appendChild(link)
       link.click()
       link.remove()
@@ -159,58 +137,11 @@ export const CarnetPage = () => {
       await historialService.guardarHistorial(user.idusuario, pdfBlob, filename)
       setSuccess('PDF generado y guardado en el historial')
     } catch (err) {
-      console.error(err)
       setError(err?.message || 'Error al exportar el carnet a PDF')
     } finally {
       setExporting(false)
     }
   }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
-    setSuccess('')
-    if (!formData.vacunaId)       { setError('Selecciona una vacuna'); return }
-    if (!formData.dosis)          { setError('Ingresa el número de dosis'); return }
-    if (!formData.lote.trim())    { setError('Ingresa el lote de la vacuna'); return }
-    if (!formData.fecha)          { setError('Ingresa la fecha de aplicación'); return }
-    if (!formData.fechaProxima)   { setError('Ingresa la fecha de próxima dosis'); return }
-
-    setSaving(true)
-    try {
-      const nueva = await carnetService.agregarVacunacion(user.idusuario, {
-        vacunaId:      parseInt(formData.vacunaId),
-        dosis:         parseInt(formData.dosis),
-        lote:          formData.lote,
-        centroId:      formData.centroId ? parseInt(formData.centroId) : null,
-        fecha:         formData.fecha,
-        fechaProxima:  formData.fechaProxima,
-        observaciones: formData.observaciones
-      })
-      setCarnet(prev => [...prev, nueva])
-      setFormData({ vacunaId: '', dosis: '', lote: '', centroId: '', fecha: '', fechaProxima: '', observaciones: '' })
-      setShowForm(false)
-      setSuccess('Vacunación registrada correctamente. Se generó una alerta para tu próxima dosis.')
-    } catch {
-      setError('Error al guardar la vacunación')
-    } finally {
-      setSaving(false)
-    }
-  }
-
-  const getNombreVacuna = (idVacuna) => {
-    const id = idVacuna?.id_vacuna ?? idVacuna?.idvacuna ?? idVacuna
-    const vacuna = findVacunaById(id)
-    return getVacunaNombre(vacuna) || 'Desconocida'
-  }
-
-  const getNombreCentro = (idCentro) => {
-    const id = idCentro?.id_centro ?? idCentro?.idcentro ?? idCentro
-    const centro = centros.find(c => String(getCentroId(c)) === String(id))
-    return getCentroNombre(centro)
-  }
-
-  const fmt = (d) => d ? new Date(d).toLocaleDateString('es-ES') : '—'
 
   if (loading) return <div className="carnet-container"><p>Cargando carnet...</p></div>
 
@@ -226,13 +157,11 @@ export const CarnetPage = () => {
           <button className="btn-secondary" onClick={exportCarnetPdf} disabled={exporting || loading}>
             {exporting ? 'Exportando...' : 'Descargar PDF'}
           </button>
-          <button className="btn-primary" onClick={() => { setShowForm(!showForm); setError(''); setSuccess('') }}>
-            {showForm ? 'Cancelar' : '+ Registrar Vacunación'}
-          </button>
         </div>
       </div>
 
-      {success && <div className="success-message" style={{marginBottom:'1rem'}}>{success}</div>}
+      {error   && <div className="error-message"   style={{ marginBottom: '1rem' }}>{error}</div>}
+      {success && <div className="success-message" style={{ marginBottom: '1rem' }}>{success}</div>}
 
       <div className="carnet-summary">
         <div className="summary-card">
@@ -246,7 +175,7 @@ export const CarnetPage = () => {
           <div className="summary-grid">
             <div>
               <p className="summary-label">Paciente</p>
-              <p>{(user?.nombre || user?.nombres) ?? ''} {(user?.apellido || user?.apellidos) ?? ''}</p>
+              <p>{user?.nombre ?? ''} {user?.apellido ?? ''}</p>
             </div>
             <div>
               <p className="summary-label">Cédula</p>
@@ -258,7 +187,7 @@ export const CarnetPage = () => {
             </div>
             <div>
               <p className="summary-label">Tipo de sangre</p>
-              <p>{(user?.tipoSangre ?? user?.tiposangre) || '—'}</p>
+              <p>{user?.tiposangre || '—'}</p>
             </div>
             <div>
               <p className="summary-label">Edad</p>
@@ -272,76 +201,11 @@ export const CarnetPage = () => {
         </div>
       </div>
 
-      {showForm && (
-        <div className="form-section">
-          <h2>Registrar Nueva Vacunación</h2>
-          <p className="section-hint">Una vez guardado, el registro no puede modificarse.</p>
-          <form onSubmit={handleSubmit}>
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="vacunaId">Vacuna *</label>
-                <select id="vacunaId" name="vacunaId" value={formData.vacunaId} onChange={handleVacunaChange}>
-                  <option value="">-- Selecciona una vacuna --</option>
-                  {vacunas.map(v => (
-                    <option key={getVacunaId(v)} value={getVacunaId(v)}>
-                      {getVacunaNombre(v)} ({v.dosis_requeridas ?? v.dosisrequeridas} dosis)
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="form-group">
-                <label htmlFor="dosis">Número de Dosis *</label>
-                <input type="number" id="dosis" name="dosis" value={formData.dosis}
-                  onChange={handleChange} placeholder="1" min="1" max="10" />
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="lote">Lote de la vacuna *</label>
-                <input type="text" id="lote" name="lote" value={formData.lote}
-                  onChange={handleChange} placeholder="Ej: LOT2026-96" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="centroId">Centro Médico</label>
-                <select id="centroId" name="centroId" value={formData.centroId} onChange={handleChange}>
-                  <option value="">-- Selecciona un centro (opcional) --</option>
-                  {centros.map(c => (
-                    <option key={getCentroId(c)} value={getCentroId(c)}>{getCentroNombre(c)} - {c.ciudad}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="fecha">Fecha de Aplicación *</label>
-                <input type="date" id="fecha" name="fecha" value={formData.fecha} onChange={handleChange} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="fechaProxima">Fecha Próxima Dosis *</label>
-                <input type="date" id="fechaProxima" name="fechaProxima"
-                  value={formData.fechaProxima} onChange={handleChange} />
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group full-width">
-                <label htmlFor="observaciones">Observaciones</label>
-                <input type="text" id="observaciones" name="observaciones"
-                  value={formData.observaciones} onChange={handleChange} placeholder="Opcional" />
-              </div>
-            </div>
-            {error && <div className="error-message">{error}</div>}
-            <button type="submit" className="btn-primary" disabled={saving}>
-              {saving ? 'Guardando...' : 'Confirmar Registro'}
-            </button>
-          </form>
-        </div>
-      )}
-
       <div className="carnet-list">
         {carnet.length === 0 ? (
           <div className="empty-state">
             <p>No hay vacunaciones registradas</p>
-            <p className="hint">Registra tu primera vacunación para mantener tu carnet actualizado</p>
+            <p className="hint">El personal médico registrará tus vacunas en el sistema</p>
           </div>
         ) : (
           <div className="carnet-table-container">
@@ -361,11 +225,11 @@ export const CarnetPage = () => {
                 {carnet.map(v => (
                   <tr key={v.idregistro ?? v.id_registro}>
                     <td>{getNombreVacuna(v.id_vacuna ?? v.idvacuna)}</td>
-                    <td>{fmt(getRegistroValue(v, 'fechaaplicacion', 'fecha_aplicacion'))}</td>
-                    <td>{getRegistroValue(v, 'numerodosis', 'numero_dosis')}</td>
-                    <td>{getRegistroValue(v, 'lotevacuna', 'lote_vacuna') || '—'}</td>
+                    <td>{fmt(getVal(v, 'fechaaplicacion', 'fecha_aplicacion'))}</td>
+                    <td>{getVal(v, 'numerodosis', 'numero_dosis')}</td>
+                    <td>{getVal(v, 'lotevacuna', 'lote_vacuna') || '—'}</td>
                     <td>{getNombreCentro(v.idcentromedico ?? v.id_centro_medico) || '—'}</td>
-                    <td>{fmt(getRegistroValue(v, 'proximadosisfecha', 'proxima_dosis_fecha', 'fecha_proxima', 'fechaproxima'))}</td>
+                    <td>{fmt(getVal(v, 'proximadosisfecha', 'proxima_dosis_fecha', 'fecha_proxima', 'fechaproxima'))}</td>
                     <td>{v.observaciones || '—'}</td>
                   </tr>
                 ))}
