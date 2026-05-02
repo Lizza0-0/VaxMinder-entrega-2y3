@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const usuarios = getUsuarios()
       const existe = usuarios.find(u => Number(u.idusuario) === Number(formData.idusuario))
-      if (existe) return { success: false, message: 'Ya existe un usuario con ese idusuario' }
+      if (existe) return { success: false, message: 'Ya existe un usuario con ese número de documento' }
 
       // Validar tipoDocumento
       const tipoDoc = formData.tipoDocumento || ''
@@ -117,13 +117,13 @@ export const AuthProvider = ({ children }) => {
       const usuario = usuarios.find(
         u => Number(u.idusuario) === Number(idusuario) && u.contrasena === contrasena
       )
-      if (!usuario) return { success: false, message: 'idusuario o contrasena incorrecta' }
+      if (!usuario) return { success: false, message: 'Número de documento o contraseña incorrecta' }
 
       const nuevoToken = generarToken(usuario.idusuario)
       guardarSesion(nuevoToken, usuario)
       return { success: true }
     } catch {
-      return { success: false, message: 'Error al iniciar sesion' }
+      return { success: false, message: 'Error al iniciar sesión' }
     }
   }
 
@@ -147,7 +147,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('vax_user', JSON.stringify(updatedUser))
       return { success: true }
     } catch {
-      return { success: false, message: 'No se pudo actualizar la informacion' }
+      return { success: false, message: 'No se pudo actualizar la información' }
     }
   }
 

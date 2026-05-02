@@ -44,7 +44,7 @@ export const RegistroPage = () => {
     <div className="auth-container">
       <div className="auth-card">
         <h1>Crear Cuenta</h1>
-        <p className="subtitle">Completa tu informacion personal</p>
+        <p className="subtitle">Completa tu información personal</p>
         <form onSubmit={handleSubmit}>
           {/* tipoDocumento + idusuario */}
           <div className="form-row">
@@ -122,7 +122,7 @@ export const RegistroPage = () => {
             {loading ? 'Registrando...' : 'Crear Cuenta'}
           </button>
         </form>
-        <p className="auth-link">Ya tienes cuenta? <a href="/login">Inicia sesion aqui</a></p>
+        <p className="auth-link">¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a></p>
       </div>
     </div>
   )

@@ -15,8 +15,8 @@ export const LoginPage = () => {
     e.preventDefault()
     setError('')
     setLoading(true)
-    if (!idusuario.trim()) { setError('Por favor ingresa tu idusuario'); setLoading(false); return }
-    if (!contrasena.trim()) { setError('Por favor ingresa tu contrasena'); setLoading(false); return }
+    if (!idusuario.trim()) { setError('Por favor ingresa tu número de documento'); setLoading(false); return }
+    if (!contrasena.trim()) { setError('Por favor ingresa tu contraseña'); setLoading(false); return }
     const result = await login(idusuario.trim(), contrasena)
     if (result.success) { navigate('/dashboard') } else { setError(result.message) }
     setLoading(false)
@@ -25,11 +25,11 @@ export const LoginPage = () => {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h1>Iniciar Sesion</h1>
-        <p className="subtitle">Accede a tu carnet de vacunacion digital</p>
+        <h1>Iniciar Sesión</h1>
+        <p className="subtitle">Accede a tu carnet de vacunación digital</p>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="idusuario">idusuario</label>
+            <label htmlFor="idusuario">Número de Documento</label>
             <input
               type="text"
               id="idusuario"
@@ -40,7 +40,7 @@ export const LoginPage = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="contrasena">contrasena</label>
+            <label htmlFor="contrasena">Contraseña</label>
             <input
               type="password"
               id="contrasena"
@@ -55,7 +55,7 @@ export const LoginPage = () => {
             {loading ? 'Ingresando...' : 'Ingresar'}
           </button>
         </form>
-        <p className="auth-link">No tienes cuenta? <a href="/registro">Registrate aqui</a></p>
+        <p className="auth-link">¿No tienes cuenta? <a href="/registro">Regístrate aquí</a></p>
       </div>
     </div>
   )

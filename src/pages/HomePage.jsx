@@ -80,7 +80,7 @@ export const HomePage = () => {
 
       <div className="cta-section">
         <h2>¿Listo para comenzar?</h2>
-        <p>Registrate hoy y mantén tu carnet de vacunación siempre a mano</p>
+        <p>Regístrate hoy y mantén tu carnet de vacunación siempre a mano</p>
         <Link to="/registro" className="btn-primary btn-large">
           Crear Mi Cuenta
         </Link>
