@@ -37,33 +37,102 @@
   color: white;
 }
 
-.hero-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 2rem;
+/* ── Tarjetas de selección de rol ───────────────────────────── */
+.role-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  width: 100%;
+  max-width: 680px;
 }
 
-.btn-primary.btn-large,
-.btn-secondary.btn-large {
+.role-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem 1.75rem;
+  text-align: center;
+  border-top: 4px solid var(--primary-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.role-card h3 {
+  color: var(--navy);
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.role-card p {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.role-card-centro {
+  border-top-color: var(--navy);
+}
+
+.role-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 0.25rem;
+}
+
+.role-icon-paciente { background: var(--primary-light); }
+.role-icon-centro   { background: var(--navy-light); }
+
+.role-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.role-card-actions .btn-primary {
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-role-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  border: 1.5px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.btn-role-outline:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background: var(--primary-light);
+}
+
+/* btn-large sobre fondo oscuro (hero) */
+.btn-primary.btn-large {
   background-color: white;
   color: var(--primary-color);
 }
-
-.btn-primary.btn-large:hover,
-.btn-secondary.btn-large:hover {
+.btn-primary.btn-large:hover {
   background-color: rgba(255, 255, 255, 0.9);
-}
-
-.btn-secondary.btn-large {
-  background-color: transparent;
-  color: white;
-  border: 2px solid white;
-}
-
-.btn-secondary.btn-large:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--primary-dark);
 }
 
 /* Sección de Características */

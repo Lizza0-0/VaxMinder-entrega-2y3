@@ -172,7 +172,8 @@ export const RegistroPage = () => {
             {loading ? 'Registrando...' : 'Crear Cuenta'}
           </button>
         </form>
-        <p className="auth-link">¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a></p>
+        <p className="auth-link">¿Ya tienes cuenta? <a href="/login/paciente">Inicia sesión aquí</a></p>
+        <p className="auth-back"><a href="/">← Volver al inicio</a></p>
       </div>
     </div>
   )

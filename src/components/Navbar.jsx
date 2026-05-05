@@ -50,8 +50,7 @@ export const Navbar = () => {
           </div>
         ) : (
           <div className="navbar-auth">
-            <Link to="/login" className="btn-link">Ingresar</Link>
-            <Link to="/registro" className="btn-link primary">Registrarse</Link>
+            <Link to="/" className="btn-link primary">Ingresar</Link>
           </div>
         )}
       </div>

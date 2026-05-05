@@ -32,7 +32,7 @@ const initAdmin = () => {
   const adminExiste = usuarios.find(u => u.rol === 'admin')
   if (!adminExiste) {
     const admin = {
-      idusuario:       999999999,
+      idusuario:       'CMED01',
       nombre:          'Admin',
       apellido:        'VaxMinder',
       email:           'admin@vaxminder.com',
@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (formData) => {
     try {
       const usuarios = getUsuarios()
-      const existe = usuarios.find(u => Number(u.idusuario) === Number(formData.idusuario))
+      const existe = usuarios.find(u => String(u.idusuario) === String(formData.idusuario))
       if (existe) return { success: false, message: 'Ya existe un usuario con ese número de documento' }
 
       const tipoDoc = formData.tipoDocumento || ''
@@ -134,7 +134,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const usuarios = getUsuarios()
       const usuario = usuarios.find(
-        u => Number(u.idusuario) === Number(idusuario) && u.contrasena === contrasena
+        u => String(u.idusuario) === String(idusuario) && u.contrasena === contrasena
       )
       if (!usuario) return { success: false, message: 'Número de documento o contraseña incorrecta' }
 

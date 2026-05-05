@@ -16,6 +16,36 @@
   max-width: 450px;
 }
 
+.auth-role-badge {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  background: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.auth-role-badge[data-tipo="centro"] {
+  background: var(--navy-light);
+  color: var(--navy);
+}
+
+.auth-back {
+  text-align: center;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.auth-back a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.auth-back a:hover { color: var(--primary-color); }
+
 .auth-card h1 {
   margin-bottom: 0.5rem;
   color: var(--text-color);
