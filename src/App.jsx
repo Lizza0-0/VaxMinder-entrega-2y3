@@ -27,9 +27,8 @@ function App() {
             <Routes>
               {/* Rutas Públicas */}
               <Route path="/" element={<HomePage />} />
-              <Route path="/login/paciente" element={<LoginPage />} />
-              <Route path="/login/centro"   element={<LoginPage />} />
-              <Route path="/login"          element={<Navigate to="/login/paciente" replace />} />
+              <Route path="/login/:tipo" element={<LoginPage />} />
+              <Route path="/login"      element={<Navigate to="/login/paciente" replace />} />
               <Route path="/registro"       element={<RegistroPage />} />
 
               {/* Rutas de Usuario */}
