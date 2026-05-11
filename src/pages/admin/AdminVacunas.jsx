@@ -3,7 +3,7 @@ import { adminService, vacunasService } from '../../services/index'
 import '../../styles/admin.css'
 
 const FORM_VACIO = {
-  nombrevacuna: '', descripcion: '', edadrecomendada: '', dosisrequeridas: '', intervaloentredosis: ''
+  nombrevacuna: '', descripcion: '', edadrecomendada: '', dosisrequeridas: '', intervalodosisdias: ''
 }
 
 export const AdminVacunas = () => {
@@ -43,7 +43,7 @@ export const AdminVacunas = () => {
       descripcion:         v.descripcion,
       edadrecomendada:     String(v.edadrecomendada),
       dosisrequeridas:     String(v.dosisrequeridas),
-      intervaloentredosis: String(v.intervaloentredosis)
+      intervalodosisdias: String(v.intervalodosisdias)
     })
     setError('')
     setSuccess('')
@@ -72,7 +72,7 @@ export const AdminVacunas = () => {
       descripcion:         formData.descripcion.trim(),
       edadrecomendada:     Number(formData.edadrecomendada),
       dosisrequeridas:     Number(formData.dosisrequeridas),
-      intervaloentredosis: Number(formData.intervaloentredosis)
+      intervalodosisdias: Number(formData.intervalodosisdias)
     }
 
     setSaving(true)
@@ -144,7 +144,7 @@ export const AdminVacunas = () => {
               </div>
               <div className="form-group">
                 <label>Intervalo entre dosis (días)</label>
-                <input type="number" name="intervaloentredosis" value={formData.intervaloentredosis}
+                <input type="number" name="intervalodosisdias" value={formData.intervalodosisdias}
                   onChange={handleChange} placeholder="0" min="0" />
               </div>
             </div>
@@ -185,7 +185,7 @@ export const AdminVacunas = () => {
                 <td>{v.descripcion}</td>
                 <td>{fmtEdad(v.edadrecomendada)}</td>
                 <td>{v.dosisrequeridas}</td>
-                <td>{v.intervaloentredosis || '—'}</td>
+                <td>{v.intervalodosisdias || '—'}</td>
                 <td>
                   <button className="btn-table primary" onClick={() => abrirEditar(v)}>Editar</button>
                 </td>

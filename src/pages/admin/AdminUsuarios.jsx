@@ -69,6 +69,21 @@ export const AdminUsuarios = () => {
     setSuccess('')
   }
 
+  const eliminarPaciente = async (idusuario) => {
+    if (!window.confirm('¿Seguro que deseas eliminar este paciente?')) return
+    try {
+      await adminService.eliminarUsuario(idusuario)
+      const nuevos = usuarios.filter(u => u.idusuario !== idusuario)
+      setUsuarios(nuevos)
+      setFiltrados(nuevos.filter(u =>
+        `${u.nombre} ${u.apellido}`.toLowerCase().includes(busqueda.toLowerCase()) ||
+        String(u.idusuario).includes(busqueda)
+      ))
+    } catch (err) {
+      alert(err.message || 'No se pudo eliminar el paciente')
+    }
+  }
+
   const getVacunaId     = (v) => v?.id_vacuna    ?? v?.idvacuna
   const getVacunaNombre = (v) => v?.nombre_vacuna ?? v?.nombrevacuna
   const getCentroId     = (c) => c?.id_centro     ?? c?.idcentro
@@ -98,7 +113,8 @@ export const AdminUsuarios = () => {
     const vacuna = findVacunaById(id)
     const dosisYa = carnet.filter(r => {
       const idV = getVal(r, 'id_vacuna', 'idvacuna')
-      return String(idV) === String(id)
+      const idVNum = idV?.idvacuna ?? idV?.id_vacuna ?? idV
+      return String(idVNum) === String(id)
     }).length
     setFormData(prev => ({ ...prev, vacunaId: id, dosis: String(dosisYa + 1) }))
   }
@@ -187,13 +203,16 @@ export const AdminUsuarios = () => {
                 <tr key={u.idusuario}>
                   <td><strong>{u.nombre} {u.apellido}</strong></td>
                   <td>{u.idusuario}</td>
-                  <td>{u.tipoDocumento}</td>
+                  <td>{u.tipodocumento || u.tipoDocumento}</td>
                   <td>{calcEdad(u.fechanacimiento)}</td>
                   <td>{u.tiposangre || '—'}</td>
                   <td>{u.email}</td>
-                  <td>
+                  <td style={{ display: 'flex', gap: '0.4rem' }}>
                     <button className="btn-table primary" onClick={() => seleccionarPaciente(u)}>
                       Ver carnet
+                    </button>
+                    <button className="btn-table danger" onClick={() => eliminarPaciente(u.idusuario)}>
+                      Eliminar
                     </button>
                   </td>
                 </tr>
@@ -213,7 +232,7 @@ export const AdminUsuarios = () => {
       <div className="patient-panel">
         <h3>{paciente.nombre} {paciente.apellido}</h3>
         <div className="patient-info-grid">
-          <div><span>Documento</span><p>{paciente.tipoDocumento} {paciente.idusuario}</p></div>
+          <div><span>Documento</span><p>{paciente.tipodocumento || paciente.tipoDocumento} {paciente.idusuario}</p></div>
           <div><span>Fecha de nacimiento</span><p>{fmt(paciente.fechanacimiento)}</p></div>
           <div><span>Edad</span><p>{calcEdad(paciente.fechanacimiento)}</p></div>
           <div><span>Tipo de sangre</span><p>{paciente.tiposangre || '—'}</p></div>

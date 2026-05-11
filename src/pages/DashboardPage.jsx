@@ -107,7 +107,7 @@ export const DashboardPage = () => {
         <h2>Información Personal</h2>
         <div className="info-grid">
           <div className="info-item"><label>Nombre completo</label><p>{user?.nombre} {user?.apellido}</p></div>
-          <div className="info-item"><label>Tipo de Documento</label><p>{user?.tipoDocumento || '—'}</p></div>
+          <div className="info-item"><label>Tipo de Documento</label><p>{user?.tipodocumento || user?.tipoDocumento || '—'}</p></div>
           <div className="info-item"><label>Número de Documento</label><p>{user?.idusuario}</p></div>
           <div className="info-item"><label>Fecha de Nacimiento</label><p>{fmt(user?.fechanacimiento)}</p></div>
           <div className="info-item"><label>Tipo de Sangre</label><p>{user?.tiposangre}</p></div>
@@ -121,12 +121,12 @@ export const DashboardPage = () => {
           <h2>Vacunas recomendadas para tu edad ({user?.edad} años)</h2>
           <div className="sugeridas-grid">
             {sugeridas.map(v => (
-              <div key={v.id_vacuna} className="sugerida-card">
+              <div key={v.idvacuna ?? v.id_vacuna} className="sugerida-card">
                 <div className="sugerida-icon">💉</div>
                 <div className="sugerida-info">
-                  <strong>{v.nombre_vacuna}</strong>
+                  <strong>{v.nombrevacuna ?? v.nombre_vacuna}</strong>
                   {v.descripcion && <p>{v.descripcion}</p>}
-                  <span className="sugerida-dosis">{v.dosis_requeridas} dosis requeridas</span>
+                  <span className="sugerida-dosis">{v.dosisrequeridas ?? v.dosis_requeridas} dosis requeridas</span>
                 </div>
               </div>
             ))}
