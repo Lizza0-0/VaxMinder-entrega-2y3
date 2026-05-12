@@ -1,0 +1,213 @@
+/* portal-centro.css — estilo unificado con la paleta del nuevo frontend */
+.portal-container { max-width:1100px; margin:0 auto; padding:2rem; }
+
+.portal-header {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  background: #1a3a5c;
+  color:#fff; border-radius:1rem; padding:1.75rem 2rem; margin-bottom:2rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.10);
+}
+.portal-badge {
+  display:inline-block; background:rgba(255,255,255,0.15);
+  padding:0.3rem 0.85rem; border-radius:999px; font-size:0.8rem;
+  font-weight:600; margin-bottom:0.5rem; letter-spacing:0.04em;
+}
+.portal-header h1 { margin:0.3rem 0 0.2rem; font-size:1.6rem; color:white; }
+.portal-subtitle  { margin:0; opacity:0.8; font-size:0.9rem; color:rgba(255,255,255,0.85); }
+
+.btn-logout-portal {
+  background:rgba(255,255,255,0.12); color:#fff;
+  border:1.5px solid rgba(255,255,255,0.5);
+  padding:0.5rem 1.2rem; border-radius:0.5rem;
+  font-size:0.88rem; font-weight:600; cursor:pointer;
+  transition: background 0.2s;
+}
+.btn-logout-portal:hover { background:rgba(255,255,255,0.22); }
+
+.portal-form-section {
+  background:#fff; border-radius:1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.09);
+  padding:2rem; margin-bottom:2rem;
+  border:1px solid #e2e8f0;
+}
+.portal-form-section h2 { margin-top:0; color:var(--navy); margin-bottom:1.5rem; font-size:1.3rem; }
+
+.form-section-title {
+  font-size:0.88rem; font-weight:700; color:var(--primary-color);
+  margin:1.75rem 0 1rem; padding-bottom:0.4rem;
+  border-bottom:2px solid #e2e8f0;
+  text-transform:uppercase; letter-spacing:0.06em;
+}
+
+.form-row {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1.25rem; margin-bottom:0.25rem;
+}
+.form-group { display:flex; flex-direction:column; gap:0.4rem; }
+.form-group.form-full { grid-column:1/-1; }
+.form-group label { font-size:0.88rem; font-weight:600; color:var(--text-color); margin-bottom:0.25rem; }
+.form-group input,
+.form-group select {
+  padding:0.65rem 0.85rem; border:1.5px solid var(--border-color);
+  border-radius:0.5rem; font-size:0.95rem; font-family:inherit;
+  background:white; color:var(--text-color);
+  transition:border-color 0.2s, box-shadow 0.2s;
+}
+.form-group input:focus,
+.form-group select:focus {
+  outline:none; border-color:var(--primary-color);
+  box-shadow:0 0 0 3px rgba(0,153,171,0.14);
+}
+
+.btn-primary {
+  background:var(--primary-color); color:#fff; border:none;
+  padding:0.7rem 1.6rem; border-radius:0.5rem;
+  font-size:0.95rem; font-weight:600; cursor:pointer;
+  margin-top:1rem; transition:background 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover:not(:disabled) { background:var(--primary-dark); box-shadow:0 4px 12px rgba(0,0,0,0.10); }
+.btn-primary:disabled { background:#cbd5e1; color:#94a3b8; cursor:not-allowed; }
+
+.error-message {
+  background:#fef2f2; color:#991b1b; padding:0.75rem 1rem;
+  border-radius:0.5rem; margin-top:1rem; font-size:0.9rem;
+  border-left:4px solid #ef4444;
+}
+.success-message {
+  background:#e0f7fb; color:#005f6b; padding:0.75rem 1rem;
+  border-radius:0.5rem; margin-top:1rem; font-size:0.9rem;
+  border-left:4px solid var(--primary-color);
+}
+
+.portal-registros {
+  background:#fff; border-radius:1rem;
+  box-shadow:0 2px 6px rgba(0,0,0,0.09);
+  padding:2rem; border:1px solid #e2e8f0;
+}
+.portal-registros h2 { margin-top:0; color:var(--navy); font-size:1.2rem; }
+
+.registros-table-container { overflow-x:auto; margin-top:1rem; }
+.registros-table { width:100%; border-collapse:collapse; font-size:0.88rem; }
+.registros-table th {
+  background:var(--primary-color); color:#fff;
+  padding:0.75rem 1rem; text-align:left; font-weight:600; white-space:nowrap;
+}
+.registros-table td { padding:0.75rem 1rem; border-bottom:1px solid #f1f5f9; color:var(--text-color); }
+.registros-table tr:hover td { background:#f8fafc; }
+
+@media (max-width:768px) {
+  .portal-container { padding:1rem; }
+  .portal-header { flex-direction:column; gap:1rem; }
+  .form-row { grid-template-columns:1fr; }
+}
+
+/* ── Paciente encontrado ─────────────────────────────────────── */
+.paciente-encontrado {
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.paciente-encontrado-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.paciente-badge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #15803d;
+  background: #dcfce7;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+}
+
+.btn-actualizar {
+  background: white;
+  color: var(--primary-color);
+  border: 1.5px solid var(--primary-color);
+  padding: 0.4rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-actualizar:hover { background: var(--primary-light); }
+.btn-actualizar.confirmar {
+  background: #dcfce7;
+  color: #15803d;
+  border-color: #86efac;
+}
+.btn-actualizar.confirmar:hover { background: #bbf7d0; }
+
+/* Campo de solo lectura */
+.input-readonly {
+  background: #f8fafc !important;
+  color: #475569 !important;
+  cursor: default !important;
+  border-color: #e2e8f0 !important;
+}
+.input-readonly:focus {
+  box-shadow: none !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Historial rápido */
+.historial-rapido {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #bbf7d0;
+}
+.historial-rapido-titulo {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #166534;
+  margin-bottom: 0.5rem;
+}
+.historial-rapido-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.historial-chip {
+  background: white;
+  border: 1px solid #86efac;
+  color: #166534;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}
+
+/* Dosis automática */
+.dosis-auto {
+  padding: 0.65rem 0.85rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 0.5rem;
+  background: #f8fafc;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+}
+.dosis-valor {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+}
+.dosis-completa {
+  font-weight: 700;
+  color: #dc2626;
+  font-size: 0.88rem;
+}
+.dosis-placeholder {
+  color: #94a3b8;
+  font-size: 0.88rem;
+  font-style: italic;
+}
