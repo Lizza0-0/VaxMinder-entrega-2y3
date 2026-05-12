@@ -1,4 +1,6 @@
 # 💉 VaxMinder — Carnet de Vacunación Digital
+Elizabeth Mejia Ochoa
+Ana Maria Mestra Perez
 
 VaxMinder es una aplicación web full-stack para la gestión digital del historial de vacunación. Permite a los pacientes consultar su carnet de vacunación, recibir alertas de próximas dosis y descargar su historial en PDF. Los centros médicos pueden registrar vacunaciones y administrar su perfil institucional.
 
@@ -241,5 +243,5 @@ npm run dev
 
 ## 👩‍💻 Desarrollado por
 
-Proyecto académico — Ingeniería de Sistemas
+Proyecto académico — ITecnico en Desarrollo de Software CESDE 
 **VaxMinder** © 2026
