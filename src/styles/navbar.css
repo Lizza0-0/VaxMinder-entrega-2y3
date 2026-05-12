@@ -1,0 +1,148 @@
+.navbar {
+  background: white;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Logo */
+.navbar-logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.navbar-logo:hover { color: var(--primary-dark); }
+
+/* Menú autenticado */
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.nav-info {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.user-name {
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+/* Lista de links */
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 0;
+  align-items: center;
+}
+
+.nav-list a {
+  display: block;
+  padding: 0.45rem 0.85rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border-radius: 0.4rem;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-list a:hover {
+  color: var(--primary-color);
+  background-color: var(--primary-light);
+}
+
+/* Link activo (NavLink agrega clase "active") */
+.nav-list a.active {
+  color: var(--primary-color);
+  background-color: var(--primary-light);
+  font-weight: 600;
+}
+
+/* Botón cerrar sesión */
+.logout-btn {
+  background-color: transparent;
+  color: var(--danger-color);
+  padding: 0.45rem 1rem;
+  border: 1.5px solid var(--danger-color);
+  border-radius: 0.4rem;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.logout-btn:hover {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+/* Menú público */
+.navbar-auth {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.btn-link.primary {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1.1rem;
+  border-radius: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.btn-link.primary:hover {
+  background-color: var(--primary-dark);
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-container {
+    height: auto;
+    padding: 0.75rem 1rem;
+    flex-wrap: wrap;
+  }
+
+  .navbar-menu {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.25rem;
+  }
+
+  .nav-list { flex-wrap: wrap; }
+
+  .nav-info { width: 100%; margin-right: 0; margin-bottom: 0.25rem; }
+
+  .navbar-auth { width: 100%; }
+}
