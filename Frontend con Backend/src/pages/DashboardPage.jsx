@@ -43,6 +43,9 @@ export const DashboardPage = () => {
     if (!editData.telefono || editData.telefono.length !== 10) {
       setSaveErr('El teléfono debe tener exactamente 10 dígitos'); return
     }
+    if (editData.contrasena && editData.contrasena.length < 6) {
+      setSaveErr('La contraseña debe tener mínimo 6 caracteres'); return
+    }
     setSaving(true)
     const r = await updateProfile(editData)
     if (r.success) { setSaveOk('Perfil actualizado'); setEditando(false) }
