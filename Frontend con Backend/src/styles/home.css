@@ -52,7 +52,6 @@
   border-radius: 1rem;
   padding: 2rem 1.75rem;
   text-align: center;
-  border-top: 4px solid var(--primary-color);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
   display: flex;
   flex-direction: column;
@@ -73,9 +72,6 @@
   line-height: 1.5;
 }
 
-.role-card-centro {
-  border-top-color: var(--navy);
-}
 
 .role-card-icon {
   width: 56px;

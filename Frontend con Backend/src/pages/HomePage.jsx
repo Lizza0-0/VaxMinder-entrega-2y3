@@ -61,31 +61,6 @@ export const HomePage = () => {
         </div>
       </div>
 
-      <div className="features-section">
-        <h2>¿Por qué VaxMinder?</h2>
-        <div className="features-grid">
-          {[
-            { icon: '📱', titulo: 'Digital', desc: 'Accede a tu carnet desde cualquier dispositivo' },
-            { icon: '🔒', titulo: 'Seguro',  desc: 'Tu información está protegida y privada' },
-            { icon: '💉', titulo: 'Completo',desc: 'Registro de todas tus vacunaciones' },
-            { icon: '🔔', titulo: 'Alertas', desc: 'Recordatorios de tus próximas vacunaciones' },
-            { icon: '🏥', titulo: 'Centros', desc: 'Ubica centros médicos cercanos' },
-            { icon: '📊', titulo: 'Historial',desc: 'Acceso a tu historial completo' },
-          ].map(f => (
-            <div className="feature-card" key={f.titulo}>
-              <div className="feature-icon">{f.icon}</div>
-              <h3>{f.titulo}</h3>
-              <p>{f.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="cta-section">
-        <h2>¿Eres paciente y aún no tienes cuenta?</h2>
-        <p>Regístrate gratis y lleva tu carnet siempre contigo</p>
-        <Link to="/registro" className="btn-primary btn-large">Crear Mi Cuenta</Link>
-      </div>
     </div>
   )
 }

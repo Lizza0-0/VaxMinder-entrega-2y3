@@ -108,6 +108,7 @@ p  { line-height: 1.65;  color: var(--text-secondary); }
 .btn-secondary:active { transform: translateY(0); }
 
 .btn-large { padding: 0.9rem 2rem; font-size: 1.05rem; }
+.btn-sm    { padding: 0.4rem 0.9rem; font-size: 0.82rem; }
 
 .btn-link {
   background: none;

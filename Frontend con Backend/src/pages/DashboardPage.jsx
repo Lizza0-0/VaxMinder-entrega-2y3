@@ -78,8 +78,8 @@ export const DashboardPage = () => {
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1.5rem'}}>
           <h2>Mis Datos</h2>
           {!editando
-            ? <button className="btn-secondary" onClick={()=>setEditando(true)}>✏️ Editar perfil</button>
-            : <button className="btn-secondary" onClick={()=>setEditando(false)}>Cancelar</button>
+            ? <button className="btn-secondary btn-sm" onClick={()=>setEditando(true)}>✏️ Editar perfil</button>
+            : <button className="btn-secondary btn-sm" onClick={()=>setEditando(false)}>Cancelar</button>
           }
         </div>
         <div className="info-grid">

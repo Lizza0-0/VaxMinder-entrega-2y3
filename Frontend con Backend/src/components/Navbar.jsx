@@ -44,12 +44,6 @@ export const Navbar = () => {
           </div>
         )}
 
-        {/* Sin sesión */}
-        {!user && !centro && (
-          <div className="navbar-auth">
-            <Link to="/" className="btn-link primary">Ingresar</Link>
-          </div>
-        )}
       </div>
     </nav>
   )

@@ -28,8 +28,8 @@ export const HistorialPage = () => {
     <div className="historial-container">
       <div className="historial-header">
         <p className="page-subtitle">Registros</p>
-        <h1>Historial de Carnets PDF</h1>
-        <p>Todos los carnets que has generado</p>
+        <h1>Historial de Carnés PDF</h1>
+        <p>Todos los carnés que has generado</p>
       </div>
 
       {error && <div className="error-message">{error}</div>}

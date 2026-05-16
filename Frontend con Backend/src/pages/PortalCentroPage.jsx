@@ -244,7 +244,6 @@ export const PortalCentroPage = () => {
           <h1>{centro?.razonsocial}</h1>
           <p className="portal-subtitle">NIT: {centro?.nit} &nbsp;|&nbsp; {centro?.ciudad}</p>
         </div>
-        <button className="btn-logout-portal" onClick={logout}>Cerrar Sesión</button>
       </div>
 
       {/* ── Perfil del centro — editable ───────────────────── */}
@@ -252,8 +251,8 @@ export const PortalCentroPage = () => {
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1rem'}}>
           <h2>Datos del Centro</h2>
           {!editandoCentro
-            ? <button className="btn-secondary" onClick={()=>setEditandoCentro(true)}>✏️ Editar perfil</button>
-            : <button className="btn-secondary" onClick={()=>setEditandoCentro(false)}>Cancelar</button>
+            ? <button className="btn-secondary btn-sm" onClick={()=>setEditandoCentro(true)}>✏️ Editar perfil</button>
+            : <button className="btn-secondary btn-sm" onClick={()=>setEditandoCentro(false)}>Cancelar</button>
           }
         </div>
         <div className="info-grid" style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))',gap:'1rem'}}>
