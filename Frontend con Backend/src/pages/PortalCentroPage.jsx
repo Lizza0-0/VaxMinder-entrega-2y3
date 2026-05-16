@@ -248,7 +248,7 @@ export const PortalCentroPage = () => {
 
       {/* ── Perfil del centro — editable ───────────────────── */}
       <div className="portal-form-section" style={{marginBottom:'1.5rem'}}>
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1rem'}}>
+        <div className="section-title-row">
           <h2>Datos del Centro</h2>
           {!editandoCentro
             ? <button className="btn-secondary btn-sm" onClick={()=>setEditandoCentro(true)}>✏️ Editar perfil</button>

@@ -24,6 +24,16 @@ export const AlertasPage = () => {
   const vistas     = alertas.filter(a => a.estado !== 'pendiente')
   const fmt = (d) => d ? new Date(d).toLocaleDateString('es-ES') : '—'
 
+  const tipoLabel = (tipo) => {
+    const map = {
+      'proximadosis':  'Próxima Dosis',
+      'proxima_dosis': 'Próxima Dosis',
+      'recordatorio':  'Recordatorio',
+      'vencimiento':   'Vencimiento',
+    }
+    return map[tipo?.toLowerCase()] || tipo || 'Alerta'
+  }
+
   if (loading) return <div className="loading">Cargando alertas...</div>
 
   return (
@@ -45,7 +55,7 @@ export const AlertasPage = () => {
               <div className="alerta-item" key={a.idalerta}>
                 <div className="alerta-icon">🔔</div>
                 <div className="alerta-content">
-                  <h3>{a.tipoalerta}</h3>
+                  <h3>{tipoLabel(a.tipoalerta)}</h3>
                   <p>{a.mensaje}</p>
                   <p style={{fontSize:'0.85rem',opacity:0.8}}>Fecha: {fmt(a.fechaalerta)}</p>
                   <span className="alerta-badge pendiente">pendiente</span>
@@ -64,7 +74,7 @@ export const AlertasPage = () => {
               <div className="alerta-item" key={a.idalerta} style={{opacity:0.6}}>
                 <div className="alerta-icon">✅</div>
                 <div className="alerta-content">
-                  <h3>{a.tipoalerta}</h3>
+                  <h3>{tipoLabel(a.tipoalerta)}</h3>
                   <p>{a.mensaje}</p>
                   <p style={{fontSize:'0.85rem'}}>Fecha: {fmt(a.fechaalerta)}</p>
                   <span className="alerta-badge vista">{a.estado}</span>

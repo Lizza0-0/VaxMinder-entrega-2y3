@@ -47,7 +47,7 @@ public class RegistroVacunacionServicio {
             alerta.setIdregistro(guardado);
             alerta.setTipoalerta("proximadosis");
             alerta.setFechaalerta(dto.getProximadosisfecha());
-            alerta.setMensaje("Proxima dosis de " + vacuna.getNombrevacuna()
+            alerta.setMensaje("Próxima dosis de " + vacuna.getNombrevacuna()
                     + " programada para el " + dto.getProximadosisfecha());
             alerta.setEstado("pendiente");
             alertasRepo.save(alerta);

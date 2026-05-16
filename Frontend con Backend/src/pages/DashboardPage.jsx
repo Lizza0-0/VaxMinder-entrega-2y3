@@ -36,7 +36,11 @@ export const DashboardPage = () => {
   }, [user])
 
   const handleSave = async (e) => {
-    e.preventDefault(); setSaveErr(''); setSaveOk(''); setSaving(true)
+    e.preventDefault(); setSaveErr(''); setSaveOk('')
+    if (!editData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(editData.email)) {
+      setSaveErr('Ingresa un correo electrónico válido (ej: nombre@dominio.com)'); return
+    }
+    setSaving(true)
     const r = await updateProfile(editData)
     if (r.success) { setSaveOk('Perfil actualizado'); setEditando(false) }
     else setSaveErr(r.message)
@@ -75,7 +79,7 @@ export const DashboardPage = () => {
 
       {/* Datos personales — exactamente los campos de UsuarioResponseDTO */}
       <div className="dashboard-section">
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1.5rem'}}>
+        <div className="section-title-row">
           <h2>Mis Datos</h2>
           {!editando
             ? <button className="btn-secondary btn-sm" onClick={()=>setEditando(true)}>✏️ Editar perfil</button>

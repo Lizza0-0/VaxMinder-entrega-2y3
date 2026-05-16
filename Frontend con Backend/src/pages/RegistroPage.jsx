@@ -128,7 +128,8 @@ export const RegistroPage = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Fecha de Nacimiento *</label>
-              <input type="date" name="fechanacimiento" value={f.fechanacimiento} onChange={set} disabled={load}/>
+              <input type="date" name="fechanacimiento" value={f.fechanacimiento} onChange={set} disabled={load}
+                min="1900-01-01" max={new Date().toISOString().split('T')[0]}/>
               {fe.fechanacimiento && <span className="field-error">{fe.fechanacimiento}</span>}
             </div>
             <div className="form-group">
