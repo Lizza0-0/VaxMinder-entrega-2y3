@@ -40,6 +40,9 @@ export const DashboardPage = () => {
     if (!editData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(editData.email)) {
       setSaveErr('Ingresa un correo electrónico válido (ej: nombre@dominio.com)'); return
     }
+    if (!editData.telefono || editData.telefono.length !== 10) {
+      setSaveErr('El teléfono debe tener exactamente 10 dígitos'); return
+    }
     setSaving(true)
     const r = await updateProfile(editData)
     if (r.success) { setSaveOk('Perfil actualizado'); setEditando(false) }
@@ -79,11 +82,11 @@ export const DashboardPage = () => {
 
       {/* Datos personales — exactamente los campos de UsuarioResponseDTO */}
       <div className="dashboard-section">
-        <div className="section-title-row">
-          <h2>Mis Datos</h2>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1.5rem',gap:'1rem'}}>
+          <h2 style={{margin:0,flex:1}}>Mis Datos</h2>
           {!editando
-            ? <button className="btn-secondary btn-sm" onClick={()=>setEditando(true)}>✏️ Editar perfil</button>
-            : <button className="btn-secondary btn-sm" onClick={()=>setEditando(false)}>Cancelar</button>
+            ? <button onClick={()=>setEditando(true)} style={{flexShrink:0,padding:'0.35rem 0.85rem',fontSize:'0.8rem',fontWeight:600,background:'white',color:'#0099ab',border:'1.5px solid #cbd5e1',borderRadius:'0.5rem',cursor:'pointer',whiteSpace:'nowrap'}}>✏️ Editar perfil</button>
+            : <button onClick={()=>setEditando(false)} style={{flexShrink:0,padding:'0.35rem 0.85rem',fontSize:'0.8rem',fontWeight:600,background:'white',color:'#64748b',border:'1.5px solid #cbd5e1',borderRadius:'0.5rem',cursor:'pointer',whiteSpace:'nowrap'}}>Cancelar</button>
           }
         </div>
         <div className="info-grid">

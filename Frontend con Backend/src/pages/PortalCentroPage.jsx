@@ -248,11 +248,11 @@ export const PortalCentroPage = () => {
 
       {/* ── Perfil del centro — editable ───────────────────── */}
       <div className="portal-form-section" style={{marginBottom:'1.5rem'}}>
-        <div className="section-title-row">
-          <h2>Datos del Centro</h2>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1rem',gap:'1rem'}}>
+          <h2 style={{margin:0,flex:1}}>Datos del Centro</h2>
           {!editandoCentro
-            ? <button className="btn-secondary btn-sm" onClick={()=>setEditandoCentro(true)}>✏️ Editar perfil</button>
-            : <button className="btn-secondary btn-sm" onClick={()=>setEditandoCentro(false)}>Cancelar</button>
+            ? <button onClick={()=>setEditandoCentro(true)} style={{flexShrink:0,padding:'0.35rem 0.85rem',fontSize:'0.8rem',fontWeight:600,background:'white',color:'#0099ab',border:'1.5px solid #cbd5e1',borderRadius:'0.5rem',cursor:'pointer',whiteSpace:'nowrap'}}>✏️ Editar perfil</button>
+            : <button onClick={()=>setEditandoCentro(false)} style={{flexShrink:0,padding:'0.35rem 0.85rem',fontSize:'0.8rem',fontWeight:600,background:'white',color:'#64748b',border:'1.5px solid #cbd5e1',borderRadius:'0.5rem',cursor:'pointer',whiteSpace:'nowrap'}}>Cancelar</button>
           }
         </div>
         <div className="info-grid" style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))',gap:'1rem'}}>
