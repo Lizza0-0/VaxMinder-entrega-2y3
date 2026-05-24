@@ -26,6 +26,7 @@ export const Navbar = () => {
               <li><NavLink to="/centros">Centros Médicos</NavLink></li>
               <li><NavLink to="/alertas">Alertas</NavLink></li>
               <li><NavLink to="/historial">Historial</NavLink></li>
+              <li><NavLink to="/analytics">Analítica</NavLink></li>
             </ul>
             <button onClick={handleLogout} className="logout-btn">Cerrar Sesión</button>
           </div>

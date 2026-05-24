@@ -12,6 +12,7 @@ import { HistorialPage } from './pages/HistorialPage'
 import { HomePage } from './pages/HomePage'
 import { PortalCentroPage } from './pages/PortalCentroPage'
 import { RegistroCentroPage } from './pages/RegistroCentroPage'
+import { AnalyticsDashboardPage } from './pages/AnalyticsDashboardPage'
 import './App.css'
 
 function App() {
@@ -35,7 +36,8 @@ function App() {
               <Route path="/carnet"    element={<ProtectedRoute><CarnetPage /></ProtectedRoute>} />
               <Route path="/centros"   element={<ProtectedRoute><CentrosPage /></ProtectedRoute>} />
               <Route path="/alertas"   element={<ProtectedRoute><AlertasPage /></ProtectedRoute>} />
-              <Route path="/historial" element={<ProtectedRoute><HistorialPage /></ProtectedRoute>} />
+              <Route path="/historial"  element={<ProtectedRoute><HistorialPage /></ProtectedRoute>} />
+              <Route path="/analytics" element={<ProtectedRoute><AnalyticsDashboardPage /></ProtectedRoute>} />
 
               {/* Protegidas centro */}
               <Route path="/centro/portal" element={<ProtectedRoute centroOnly><PortalCentroPage /></ProtectedRoute>} />
