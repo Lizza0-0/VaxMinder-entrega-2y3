@@ -1,0 +1,9 @@
+{
+  "total_vacunaciones": 10,
+  "total_vacunas_catalogo": 10,
+  "alertas_pendientes": 6,
+  "total_centros": 10,
+  "vacuna_mas_aplicada": "COVID-19 Bivalente",
+  "total_personas_vacunadas": 6,
+  "total_personas_esquema_completo": 6
+}

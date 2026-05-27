@@ -1,0 +1,22 @@
+[
+  {
+    "nombrevacuna": "COVID-19 Bivalente",
+    "personas_vacunadas": 3
+  },
+  {
+    "nombrevacuna": "Fiebre Amarilla",
+    "personas_vacunadas": 2
+  },
+  {
+    "nombrevacuna": "Tetanos Td",
+    "personas_vacunadas": 2
+  },
+  {
+    "nombrevacuna": "Influenza",
+    "personas_vacunadas": 1
+  },
+  {
+    "nombrevacuna": "Rotavirus",
+    "personas_vacunadas": 1
+  }
+]

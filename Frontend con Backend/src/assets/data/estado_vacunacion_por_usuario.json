@@ -1,0 +1,602 @@
+[
+  {
+    "idusuario": 1001234567,
+    "idvacuna": 1,
+    "nombrevacuna": "COVID-19 Bivalente",
+    "dosis_max_aplicada": 2,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 0,
+    "estado": "completada"
+  },
+  {
+    "idusuario": 1001234567,
+    "idvacuna": 9,
+    "nombrevacuna": "Rotavirus",
+    "dosis_max_aplicada": 1,
+    "dosisrequeridas": 3,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 2,
+    "estado": "en_progreso"
+  },
+  {
+    "idusuario": 1002345678,
+    "idvacuna": 2,
+    "nombrevacuna": "Influenza",
+    "dosis_max_aplicada": 1,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 0,
+    "estado": "completada"
+  },
+  {
+    "idusuario": 1003456789,
+    "idvacuna": 10,
+    "nombrevacuna": "Tetanos Td",
+    "dosis_max_aplicada": 1,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 0,
+    "estado": "completada"
+  },
+  {
+    "idusuario": 1004567890,
+    "idvacuna": 8,
+    "nombrevacuna": "Fiebre Amarilla",
+    "dosis_max_aplicada": 1,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 0,
+    "estado": "completada"
+  },
+  {
+    "idusuario": 1038134116,
+    "idvacuna": 1,
+    "nombrevacuna": "COVID-19 Bivalente",
+    "dosis_max_aplicada": 1,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "en_progreso"
+  },
+  {
+    "idusuario": 1192742853,
+    "idvacuna": 1,
+    "nombrevacuna": "COVID-19 Bivalente",
+    "dosis_max_aplicada": 1,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "en_progreso"
+  },
+  {
+    "idusuario": 1192742853,
+    "idvacuna": 8,
+    "nombrevacuna": "Fiebre Amarilla",
+    "dosis_max_aplicada": 1,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 0,
+    "estado": "completada"
+  },
+  {
+    "idusuario": 1192742853,
+    "idvacuna": 10,
+    "nombrevacuna": "Tetanos Td",
+    "dosis_max_aplicada": 1,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 0,
+    "estado": "completada"
+  },
+  {
+    "idusuario": 1192742853,
+    "idvacuna": 2,
+    "nombrevacuna": "Influenza",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1192742853,
+    "idvacuna": 3,
+    "nombrevacuna": "Triple Viral MMR",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1192742853,
+    "idvacuna": 4,
+    "nombrevacuna": "Hepatitis B",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 3,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 3,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1192742853,
+    "idvacuna": 5,
+    "nombrevacuna": "DPT Pentavalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 5,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 5,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1192742853,
+    "idvacuna": 6,
+    "nombrevacuna": "Polio VOP",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 4,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 4,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1192742853,
+    "idvacuna": 7,
+    "nombrevacuna": "VPH Bivalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1192742853,
+    "idvacuna": 9,
+    "nombrevacuna": "Rotavirus",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 3,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 3,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1001234567,
+    "idvacuna": 2,
+    "nombrevacuna": "Influenza",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1001234567,
+    "idvacuna": 3,
+    "nombrevacuna": "Triple Viral MMR",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1001234567,
+    "idvacuna": 4,
+    "nombrevacuna": "Hepatitis B",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 3,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 3,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1001234567,
+    "idvacuna": 5,
+    "nombrevacuna": "DPT Pentavalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 5,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 5,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1001234567,
+    "idvacuna": 6,
+    "nombrevacuna": "Polio VOP",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 4,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 4,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1001234567,
+    "idvacuna": 7,
+    "nombrevacuna": "VPH Bivalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1001234567,
+    "idvacuna": 8,
+    "nombrevacuna": "Fiebre Amarilla",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1001234567,
+    "idvacuna": 10,
+    "nombrevacuna": "Tetanos Td",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1002345678,
+    "idvacuna": 1,
+    "nombrevacuna": "COVID-19 Bivalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1002345678,
+    "idvacuna": 3,
+    "nombrevacuna": "Triple Viral MMR",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1002345678,
+    "idvacuna": 4,
+    "nombrevacuna": "Hepatitis B",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 3,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 3,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1002345678,
+    "idvacuna": 5,
+    "nombrevacuna": "DPT Pentavalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 5,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 5,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1002345678,
+    "idvacuna": 6,
+    "nombrevacuna": "Polio VOP",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 4,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 4,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1002345678,
+    "idvacuna": 7,
+    "nombrevacuna": "VPH Bivalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1002345678,
+    "idvacuna": 8,
+    "nombrevacuna": "Fiebre Amarilla",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1002345678,
+    "idvacuna": 9,
+    "nombrevacuna": "Rotavirus",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 3,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 3,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1002345678,
+    "idvacuna": 10,
+    "nombrevacuna": "Tetanos Td",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1038134116,
+    "idvacuna": 2,
+    "nombrevacuna": "Influenza",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1038134116,
+    "idvacuna": 3,
+    "nombrevacuna": "Triple Viral MMR",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1038134116,
+    "idvacuna": 4,
+    "nombrevacuna": "Hepatitis B",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 3,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 3,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1038134116,
+    "idvacuna": 5,
+    "nombrevacuna": "DPT Pentavalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 5,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 5,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1038134116,
+    "idvacuna": 6,
+    "nombrevacuna": "Polio VOP",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 4,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 4,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1038134116,
+    "idvacuna": 7,
+    "nombrevacuna": "VPH Bivalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1038134116,
+    "idvacuna": 8,
+    "nombrevacuna": "Fiebre Amarilla",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1038134116,
+    "idvacuna": 9,
+    "nombrevacuna": "Rotavirus",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 3,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 3,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1038134116,
+    "idvacuna": 10,
+    "nombrevacuna": "Tetanos Td",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1003456789,
+    "idvacuna": 1,
+    "nombrevacuna": "COVID-19 Bivalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1003456789,
+    "idvacuna": 2,
+    "nombrevacuna": "Influenza",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1003456789,
+    "idvacuna": 3,
+    "nombrevacuna": "Triple Viral MMR",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1003456789,
+    "idvacuna": 4,
+    "nombrevacuna": "Hepatitis B",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 3,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 3,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1003456789,
+    "idvacuna": 5,
+    "nombrevacuna": "DPT Pentavalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 5,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 5,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1003456789,
+    "idvacuna": 6,
+    "nombrevacuna": "Polio VOP",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 4,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 4,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1003456789,
+    "idvacuna": 7,
+    "nombrevacuna": "VPH Bivalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1003456789,
+    "idvacuna": 8,
+    "nombrevacuna": "Fiebre Amarilla",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1003456789,
+    "idvacuna": 9,
+    "nombrevacuna": "Rotavirus",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 3,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 3,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1004567890,
+    "idvacuna": 1,
+    "nombrevacuna": "COVID-19 Bivalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1004567890,
+    "idvacuna": 2,
+    "nombrevacuna": "Influenza",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1004567890,
+    "idvacuna": 3,
+    "nombrevacuna": "Triple Viral MMR",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1004567890,
+    "idvacuna": 4,
+    "nombrevacuna": "Hepatitis B",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 3,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 3,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1004567890,
+    "idvacuna": 5,
+    "nombrevacuna": "DPT Pentavalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 5,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 5,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1004567890,
+    "idvacuna": 6,
+    "nombrevacuna": "Polio VOP",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 4,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 4,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1004567890,
+    "idvacuna": 7,
+    "nombrevacuna": "VPH Bivalente",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 2,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1004567890,
+    "idvacuna": 9,
+    "nombrevacuna": "Rotavirus",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 3,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 3,
+    "estado": "pendiente"
+  },
+  {
+    "idusuario": 1004567890,
+    "idvacuna": 10,
+    "nombrevacuna": "Tetanos Td",
+    "dosis_max_aplicada": 0,
+    "dosisrequeridas": 1,
+    "requiererefuerzo": true,
+    "dosis_faltantes": 1,
+    "estado": "pendiente"
+  }
+]

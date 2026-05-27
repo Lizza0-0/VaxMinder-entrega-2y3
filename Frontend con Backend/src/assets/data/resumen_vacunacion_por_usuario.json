@@ -1,0 +1,44 @@
+[
+  {
+    "idusuario": 1001234567,
+    "vacunas_completadas": 1,
+    "vacunas_en_progreso": 1,
+    "vacunas_pendientes": 8,
+    "vacunas_con_refuerzo": 1
+  },
+  {
+    "idusuario": 1002345678,
+    "vacunas_completadas": 1,
+    "vacunas_en_progreso": 0,
+    "vacunas_pendientes": 9,
+    "vacunas_con_refuerzo": 1
+  },
+  {
+    "idusuario": 1003456789,
+    "vacunas_completadas": 1,
+    "vacunas_en_progreso": 0,
+    "vacunas_pendientes": 9,
+    "vacunas_con_refuerzo": 1
+  },
+  {
+    "idusuario": 1004567890,
+    "vacunas_completadas": 1,
+    "vacunas_en_progreso": 0,
+    "vacunas_pendientes": 9,
+    "vacunas_con_refuerzo": 1
+  },
+  {
+    "idusuario": 1038134116,
+    "vacunas_completadas": 0,
+    "vacunas_en_progreso": 1,
+    "vacunas_pendientes": 9,
+    "vacunas_con_refuerzo": 1
+  },
+  {
+    "idusuario": 1192742853,
+    "vacunas_completadas": 2,
+    "vacunas_en_progreso": 1,
+    "vacunas_pendientes": 7,
+    "vacunas_con_refuerzo": 3
+  }
+]

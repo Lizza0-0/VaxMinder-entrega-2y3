@@ -1,0 +1,233 @@
+[
+  {
+    "idcentromedico": 2,
+    "personas_vacunadas": 4,
+    "total_dosis": 6,
+    "promedio_dosis": 1.17,
+    "pct_del_total": 60.0,
+    "ranking": 1,
+    "total_centros_sistema": 5,
+    "vacuna_top": "COVID-19 Bivalente",
+    "vacuna_top_aplicaciones": 3,
+    "vacunas_detalle": [
+      {
+        "nombre": "COVID-19 Bivalente",
+        "personas": 2,
+        "dosis": 3
+      },
+      {
+        "nombre": "Fiebre Amarilla",
+        "personas": 2,
+        "dosis": 2
+      },
+      {
+        "nombre": "Influenza",
+        "personas": 1,
+        "dosis": 1
+      }
+    ],
+    "vacunas_por_tipo": {
+      "COVID-19 Bivalente": 2,
+      "Fiebre Amarilla": 2,
+      "Influenza": 1
+    },
+    "tendencia_mensual": [
+      {
+        "mes": "2024-07",
+        "total": 3
+      },
+      {
+        "mes": "2024-08",
+        "total": 1
+      },
+      {
+        "mes": "2025-05",
+        "total": 1
+      },
+      {
+        "mes": "2026-05",
+        "total": 1
+      }
+    ],
+    "alertas_por_estado": {
+      "pendiente": 5
+    },
+    "alertas_pendientes": 5,
+    "alertas_total": 5,
+    "distribucion_dosis": [
+      {
+        "dosis": "Dosis 1",
+        "total": 5
+      },
+      {
+        "dosis": "Dosis 2",
+        "total": 1
+      }
+    ],
+    "idcentro": 2,
+    "nombrecentro": "Clinica Las Americas",
+    "ciudad": "Medellin"
+  },
+  {
+    "idcentromedico": 3,
+    "personas_vacunadas": 1,
+    "total_dosis": 1,
+    "promedio_dosis": 1.0,
+    "pct_del_total": 10.0,
+    "ranking": 2,
+    "total_centros_sistema": 5,
+    "vacuna_top": "Tetanos Td",
+    "vacuna_top_aplicaciones": 1,
+    "vacunas_detalle": [
+      {
+        "nombre": "Tetanos Td",
+        "personas": 1,
+        "dosis": 1
+      }
+    ],
+    "vacunas_por_tipo": {
+      "Tetanos Td": 1
+    },
+    "tendencia_mensual": [
+      {
+        "mes": "2026-05",
+        "total": 1
+      }
+    ],
+    "alertas_por_estado": {
+      "pendiente": 2
+    },
+    "alertas_pendientes": 2,
+    "alertas_total": 2,
+    "distribucion_dosis": [
+      {
+        "dosis": "Dosis 1",
+        "total": 1
+      }
+    ],
+    "idcentro": 3,
+    "nombrecentro": "IPS Comfama Bello",
+    "ciudad": "Bello"
+  },
+  {
+    "idcentromedico": 4,
+    "personas_vacunadas": 1,
+    "total_dosis": 1,
+    "promedio_dosis": 1.0,
+    "pct_del_total": 10.0,
+    "ranking": 3,
+    "total_centros_sistema": 5,
+    "vacuna_top": "COVID-19 Bivalente",
+    "vacuna_top_aplicaciones": 1,
+    "vacunas_detalle": [
+      {
+        "nombre": "COVID-19 Bivalente",
+        "personas": 1,
+        "dosis": 1
+      }
+    ],
+    "vacunas_por_tipo": {
+      "COVID-19 Bivalente": 1
+    },
+    "tendencia_mensual": [
+      {
+        "mes": "2025-05",
+        "total": 1
+      }
+    ],
+    "alertas_por_estado": {
+      "pendiente": 1
+    },
+    "alertas_pendientes": 1,
+    "alertas_total": 1,
+    "distribucion_dosis": [
+      {
+        "dosis": "Dosis 1",
+        "total": 1
+      }
+    ],
+    "idcentro": 4,
+    "nombrecentro": "Unidad de Vacunacion Itagui",
+    "ciudad": "Itagui"
+  },
+  {
+    "idcentromedico": 8,
+    "personas_vacunadas": 1,
+    "total_dosis": 1,
+    "promedio_dosis": 1.0,
+    "pct_del_total": 10.0,
+    "ranking": 4,
+    "total_centros_sistema": 5,
+    "vacuna_top": "Tetanos Td",
+    "vacuna_top_aplicaciones": 1,
+    "vacunas_detalle": [
+      {
+        "nombre": "Tetanos Td",
+        "personas": 1,
+        "dosis": 1
+      }
+    ],
+    "vacunas_por_tipo": {
+      "Tetanos Td": 1
+    },
+    "tendencia_mensual": [
+      {
+        "mes": "2026-05",
+        "total": 1
+      }
+    ],
+    "alertas_por_estado": {},
+    "alertas_pendientes": 0,
+    "alertas_total": 0,
+    "distribucion_dosis": [
+      {
+        "dosis": "Dosis 1",
+        "total": 1
+      }
+    ],
+    "idcentro": 8,
+    "nombrecentro": "IPS Sura Centro",
+    "ciudad": "Medellin"
+  },
+  {
+    "idcentromedico": 11,
+    "personas_vacunadas": 1,
+    "total_dosis": 1,
+    "promedio_dosis": 1.0,
+    "pct_del_total": 10.0,
+    "ranking": 5,
+    "total_centros_sistema": 5,
+    "vacuna_top": "Rotavirus",
+    "vacuna_top_aplicaciones": 1,
+    "vacunas_detalle": [
+      {
+        "nombre": "Rotavirus",
+        "personas": 1,
+        "dosis": 1
+      }
+    ],
+    "vacunas_por_tipo": {
+      "Rotavirus": 1
+    },
+    "tendencia_mensual": [
+      {
+        "mes": "2025-04",
+        "total": 1
+      }
+    ],
+    "alertas_por_estado": {
+      "pendiente": 2
+    },
+    "alertas_pendientes": 2,
+    "alertas_total": 2,
+    "distribucion_dosis": [
+      {
+        "dosis": "Dosis 1",
+        "total": 1
+      }
+    ],
+    "idcentro": 11,
+    "nombrecentro": "Centro Salud Pablo Tobon Uribe",
+    "ciudad": "Medellin"
+  }
+]

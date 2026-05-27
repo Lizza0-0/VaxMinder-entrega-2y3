@@ -23,6 +23,12 @@ export const CarnetPage = () => {
   const [exporting, setExporting] = useState(false)
   const [error,     setError]     = useState('')
   const [success,   setSuccess]   = useState('')
+  
+  // ── Estado para incentivos de vacunación ──────────────────
+  const [personasVacuna, setPersonasVacuna] = useState([])
+  const [esquemasCompletos, setEsquemasCompletos] = useState([])
+  const [loadingIncentivos, setLoadingIncentivos] = useState(false)
+  const [mostrarIncentivos, setMostrarIncentivos] = useState(false)
 
   useEffect(() => {
     if (!user) return
@@ -31,6 +37,58 @@ export const CarnetPage = () => {
       .catch(() => setError('Error al cargar el carnet'))
       .finally(() => setLoading(false))
   }, [user])
+
+  // ── Cargar datos de incentivos ────────────────────────────
+  const cargarIncentivos = async () => {
+    setLoadingIncentivos(true)
+    try {
+      const [resPersonas, resEsquemas] = await Promise.all([
+        fetch('assets/data/personas_por_vacuna.json').then(r => {
+          if (!r.ok) throw new Error(`Error ${r.status}`)
+          return r.json()
+        }).catch(e => {
+          console.error('Error cargando personas_por_vacuna.json:', e)
+          return []
+        }),
+        fetch('assets/data/esquemas_completados.json').then(r => {
+          if (!r.ok) throw new Error(`Error ${r.status}`)
+          return r.json()
+        }).catch(e => {
+          console.error('Error cargando esquemas_completados.json:', e)
+          return []
+        })
+      ])
+      setPersonasVacuna(Array.isArray(resPersonas) ? resPersonas : [])
+      setEsquemasCompletos(Array.isArray(resEsquemas) ? resEsquemas : [])
+      setMostrarIncentivos(true)
+    } catch (e) {
+      console.error('Error cargando incentivos:', e)
+    }
+    setLoadingIncentivos(false)
+  }
+
+  // ── Calcular vacunas faltantes del usuario ─────────────────
+  const calcularVacunasFaltantes = () => {
+    if (carnet.length === 0 || !personasVacuna) return []
+    
+    // Obtener vacunas aplicadas con sus dosis
+    const vacunasAplicadas = {}
+    carnet.forEach(reg => {
+      const nomVacuna = reg.idvacuna?.nombrevacuna || '—'
+      const dosisRequeridas = reg.idvacuna?.dosisrequeridas || 1
+      if (!vacunasAplicadas[nomVacuna]) {
+        vacunasAplicadas[nomVacuna] = { aplicadas: 0, requeridas: dosisRequeridas }
+      }
+      vacunasAplicadas[nomVacuna].aplicadas += 1
+    })
+    
+    // Filtrar faltantes
+    return personasVacuna.filter(v => {
+      const status = vacunasAplicadas[v.nombrevacuna]
+      // Si no está en el carnet del usuario, o si le faltan dosis
+      return !status || status.aplicadas < status.requeridas
+    })
+  }
 
   // Leer datos anidados que devuelve el backend
   const getNombreVacuna = (r) => r?.idvacuna?.nombrevacuna            || '—'
@@ -155,6 +213,89 @@ export const CarnetPage = () => {
             <div><p className="summary-label">Fecha de Registro</p><p>{fmt(user?.fecharegistro)}</p></div>
           </div>
         </div>
+      </div>
+
+      {/* ── Panel de Incentivos de Vacunación ────────────────────── */}
+      <div style={{background:'linear-gradient(135deg,#fff3e0 0%,#ffe0b2 100%)',border:'2px solid #ff9800',borderRadius:'0.75rem',padding:'1.5rem',marginBottom:'1.5rem'}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1rem'}}>
+          <h2 style={{margin:0,color:'#e65100',fontSize:'1.25rem'}}>🎯 ¡Cumple tu Esquema de Vacunación!</h2>
+          {!mostrarIncentivos
+            ? <button onClick={cargarIncentivos} disabled={loadingIncentivos} style={{padding:'0.5rem 1rem',background:'#ff9800',color:'white',border:'none',borderRadius:'0.5rem',cursor:'pointer',fontWeight:600}}>
+              {loadingIncentivos ? 'Cargando...' : 'Ver Incentivos'}
+            </button>
+            : <button onClick={()=>setMostrarIncentivos(false)} style={{padding:'0.5rem 1rem',background:'#ff6b6b',color:'white',border:'none',borderRadius:'0.5rem',cursor:'pointer',fontWeight:600}}>
+              Cerrar
+            </button>
+          }
+        </div>
+
+        {mostrarIncentivos && personasVacuna.length > 0 && (
+          <div>
+            {/* VACUNAS QUE LE FALTAN - LO MÁS IMPORTANTE */}
+            {(() => {
+              const vacunasFaltantes = calcularVacunasFaltantes()
+              return vacunasFaltantes.length > 0 ? (
+                <div style={{marginBottom:'1.5rem',padding:'1rem',background:'white',borderRadius:'0.5rem',border:'2px solid #ff6b6b'}}>
+                  <h3 style={{margin:'0 0 1rem',color:'#c63030',fontSize:'1rem'}}>⚠️ Vacunas que te faltan completar:</h3>
+                  <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',gap:'1rem'}}>
+                    {vacunasFaltantes.map((v, i) => (
+                      <div key={i} style={{background:'linear-gradient(135deg,#ff6b6b 0%,#ff5252 100%)',color:'white',padding:'1rem',borderRadius:'0.5rem',textAlign:'center',boxShadow:'0 4px 12px rgba(255, 107, 107, 0.3)'}}>
+                        <p style={{margin:'0 0 0.5rem',fontWeight:600,fontSize:'1rem'}}>{v.nombrevacuna}</p>
+                        <p style={{margin:'0 0 0.5rem',fontSize:'2rem',fontWeight:'bold'}}>{v.personas_vacunadas}</p>
+                        <small style={{opacity:0.95}}>personas ya se vacunaron con ésta</small>
+                        <p style={{margin:'0.5rem 0 0',fontSize:'0.85rem',opacity:0.9}}>💪 ¡Tú también puedes!</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div style={{padding:'1rem',background:'white',borderRadius:'0.5rem',border:'2px solid #4caf50',marginBottom:'1.5rem'}}>
+                  <p style={{margin:0,color:'#2e7d32',fontSize:'1rem',fontWeight:600}}>✅ ¡Felicidades! Has completado todas tus vacunaciones</p>
+                </div>
+              )
+            })()}
+
+            {/* Vacunas que YA tiene */}
+            {carnet.length > 0 && (
+              <div style={{marginBottom:'1.5rem'}}>
+                <h3 style={{margin:'0 0 1rem',color:'#2e7d32',fontSize:'1rem'}}>✅ Vacunas que ya completaste:</h3>
+                <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(180px,1fr))',gap:'0.75rem'}}>
+                  {carnet.map((reg, i) => {
+                    const nombreVacuna = reg.idvacuna?.nombrevacuna || '—'
+                    const datoVacuna = personasVacuna.find(v => v.nombrevacuna === nombreVacuna)
+                    return (
+                      <div key={i} style={{background:'white',padding:'0.75rem',borderRadius:'0.5rem',boxShadow:'0 2px 6px rgba(0,0,0,0.1)',borderLeft:'4px solid #4caf50'}}>
+                        <p style={{margin:'0 0 0.25rem',fontWeight:600,fontSize:'0.9rem',color:'#333'}}>{nombreVacuna}</p>
+                        {datoVacuna ? (
+                          <>
+                            <p style={{margin:'0 0 0.25rem',fontSize:'1.25rem',fontWeight:'bold',color:'#4caf50'}}>{datoVacuna.personas_vacunadas}</p>
+                            <small style={{color:'#666'}}>personas en tu comunidad</small>
+                          </>
+                        ) : (
+                          <small style={{color:'#999'}}>Datos no disponibles</small>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Motivación final */}
+            {esquemasCompletos.length > 0 && (
+              <div style={{marginTop:'1rem',background:'linear-gradient(135deg,#c8e6c9 0%,#a5d6a7 100%)',padding:'1rem',borderRadius:'0.5rem',borderLeft:'4px solid #2e7d32'}}>
+                <h3 style={{margin:'0 0 0.5rem',color:'#1b5e20',fontSize:'0.95rem',fontWeight:600}}>🌟 Historias de éxito en tu comunidad:</h3>
+                <div style={{fontSize:'0.9rem',color:'#1b5e20',lineHeight:'1.6'}}>
+                  {esquemasCompletos.slice(0, 3).map((e, i) => (
+                    <p key={i} style={{margin:'0.25rem 0'}}>
+                      • {e.personas_esquema_completo} personas completaron su esquema de {e.nombrevacuna}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Tabla de vacunas — datos de registrovacunacion */}
