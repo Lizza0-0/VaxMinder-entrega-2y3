@@ -1,247 +1,191 @@
-# 💉 VaxMinder — Carnet de Vacunación Digital
-Elizabeth Mejia Ochoa
-Ana Maria Mestra Perez
+# VaxMinder — Carnet de Vacunación Digital
 
-VaxMinder es una aplicación web full-stack para la gestión digital del historial de vacunación. Permite a los pacientes consultar su carnet de vacunación, recibir alertas de próximas dosis y descargar su historial en PDF. Los centros médicos pueden registrar vacunaciones y administrar su perfil institucional.
-
----
-
-## 📋 Descripción General
-
-El sistema maneja dos tipos de usuarios:
-
-**👤 Paciente**
-- Registro e inicio de sesión con cédula
-- Consulta de carnet de vacunación digital
-- Alertas de próximas dosis pendientes
-- Vacunas sugeridas según edad
-- Descarga de historial en PDF
-- Edición de correo, teléfono y contraseña
-
-**🏥 Centro Médico**
-- Registro e inicio de sesión con NIT
-- Búsqueda de pacientes por número de documento
-- Registro de vacunaciones con cálculo automático de próxima dosis
-- Bloqueo automático del campo "próxima dosis" en la última dosis del esquema
-- Edición de perfil: razón social, dirección, ciudad y teléfono (NIT inmutable)
+**Elizabeth Mejia Ochoa · Ana Maria Mestra Perez**  
+Proyecto Integrador — Tecnico en Desarrollo de Software, CESDE · 2026
 
 ---
 
-## 🚀 Tecnologías Utilizadas
+## Descripcion
 
-### Frontend
-| Tecnología | Descripción |
-|---|---|
-| React 18 | Librería de interfaz de usuario |
-| Vite 5 | Empaquetador y servidor de desarrollo |
-| React Router DOM 6 | Enrutamiento de páginas |
-| jsPDF + html2canvas | Generación de PDF del carnet |
-| CSS Modules | Estilos por módulo |
+VaxMinder es una aplicacion web full-stack para la gestion digital del historial de vacunacion. Conecta pacientes y centros medicos en un mismo sistema, con analisis de datos integrado mediante Python.
 
-### Backend
-| Tecnología | Descripción |
-|---|---|
-| Java 17 | Lenguaje principal |
-| Spring Boot 3 | Framework principal |
-| Spring Security | Autenticación y autorización |
-| JWT (JSON Web Token) | Manejo de sesiones stateless |
-| Spring Data JPA | Acceso a base de datos |
-| Maven | Gestión de dependencias |
+**Paciente**
+- Consulta de carnet de vacunacion digital
+- Estado de vacunacion: completadas, en progreso y pendientes
+- Alertas de proximas dosis y vacunas sugeridas por edad
+- Descarga del historial en PDF
+- Edicion de correo, telefono y contrasena
 
-### Base de Datos
-| Tecnología | Descripción |
-|---|---|
-| MariaDB 10.4 / MySQL | Motor de base de datos |
-| phpMyAdmin 5.2 | Administración visual |
+**Centro Medico**
+- Busqueda de pacientes por numero de documento
+- Registro de vacunaciones con calculo automatico de proxima dosis
+- Analitica propia del centro: KPIs, tendencia mensual y comparacion con otros centros
+- Edicion de perfil institucional (NIT inmutable)
 
 ---
 
-## 📁 Estructura del Proyecto
+## Tecnologias
+
+| Capa | Tecnologia |
+|---|---|
+| Frontend | React 18, Vite 5, React Router DOM 6, jsPDF |
+| Backend | Java 17, Spring Boot 3, Spring Security, JWT, JPA |
+| Base de datos | MariaDB / MySQL, phpMyAdmin |
+| Analisis de datos | Python 3.10+, Pandas, Matplotlib, requests |
+
+---
+
+## Estructura del Proyecto
 
 ```
 vaxminder_Final/
-│
-├── Frontend con Backend/          ← Aplicación React (Vite)
-│   ├── index.html
-│   ├── package.json
-│   ├── vite.config.js
+├── Frontend con Backend/       React + Vite
 │   └── src/
-│       ├── App.jsx
-│       ├── main.jsx
-│       ├── components/
-│       │   ├── Navbar.jsx
-│       │   └── ProtectedRoute.jsx
-│       ├── context/
-│       │   └── AuthContext.jsx        ← Manejo de sesión (paciente y centro)
-│       ├── data/
-│       │   └── ciudadesColombia.js    ← Lista completa de municipios de Colombia
-│       ├── pages/
-│       │   ├── HomePage.jsx
-│       │   ├── LoginPage.jsx
-│       │   ├── RegistroPage.jsx
-│       │   ├── RegistroCentroPage.jsx
-│       │   ├── DashboardPage.jsx
-│       │   ├── CarnetPage.jsx
-│       │   ├── AlertasPage.jsx
-│       │   ├── HistorialPage.jsx
-│       │   ├── CentrosPage.jsx
-│       │   └── PortalCentroPage.jsx
-│       ├── services/
-│       │   └── index.js               ← Llamadas a la API REST
+│       ├── pages/              DashboardPage, PortalCentroPage, CarnetPage...
+│       ├── context/            AuthContext.jsx
+│       ├── services/           index.js (llamadas a la API)
+│       ├── assets/
+│       │   ├── graficos/       imagenes .png generadas por Python
+│       │   └── data/           archivos .json generados por Python
 │       └── styles/
-│           ├── index.css
-│           ├── auth.css
-│           ├── dashboard.css
-│           ├── carnet.css
-│           ├── alertas.css
-│           ├── historial.css
-│           ├── portal-centro.css
-│           ├── centros.css
-│           ├── home.css
-│           └── navbar.css
-│
-└── Backend/
-    └── Backend/
-        ├── pom.xml
-        ├── vaxminder_db.sql           ← Script de base de datos listo para importar
-        └── src/main/
-            ├── resources/
-            │   └── application.properties
-            └── java/com/vaxminder/
-                ├── VaxminderApplication.java
-                ├── config/            SecurityConfig.java
-                ├── controlador/       8 controladores REST
-                ├── dto/               10 objetos de transferencia
-                ├── modelo/            7 entidades JPA
-                ├── repositorio/       7 repositorios
-                ├── servicio/          7 servicios
-                └── security/          JwtUtil.java, JwtFilter.java
+├── Backend/
+│   └── src/main/java/com/vaxminder/
+│       ├── controlador/        8 controladores REST
+│       ├── modelo/             7 entidades JPA
+│       ├── servicio/           7 servicios
+│       └── security/           JwtUtil, JwtFilter
+└── python/
+    ├── main.py
+    └── notebook/
+        ├── consumo.py          consume 5 endpoints REST
+        ├── limpieza.py         limpieza y validacion de DataFrames
+        ├── filtros.py          6 filtros con query() y operadores logicos
+        ├── agrupaciones.py     10 agrupaciones con groupby() y KPIs
+        ├── graficacion.py      9 graficas con Matplotlib
+        └── exportacion.py      exporta .png y .json al frontend
 ```
 
 ---
 
-## ⚙️ Instalación y Configuración
+## Instalacion
 
 ### Requisitos previos
-- Node.js 18+
-- Java 17+
-- Maven 3.8+
-- MySQL o MariaDB
-- phpMyAdmin (opcional pero recomendado)
+- Node.js 18+, Java 17+, Maven 3.8+, Python 3.10+
+- MySQL o MariaDB corriendo en el puerto 3306
 
----
+### 1. Base de datos
 
-### 1. Base de Datos
+Importar el archivo `Backend/Backend/vaxminder_db.sql` desde phpMyAdmin en `http://localhost/phpmyadmin`.
 
-1. Abre **phpMyAdmin** en `http://localhost/phpmyadmin`
-2. Selecciona el servidor raíz (sin ninguna base de datos seleccionada)
-3. Ve a la pestaña **Importar**
-4. Selecciona el archivo `Backend/Backend/vaxminder_db.sql`
-5. Clic en **Ejecutar**
+### 2. Backend
 
-Esto creará automáticamente la base de datos `vaxminder_db` con todas las tablas y datos de prueba incluidos.
-
----
-
-### 2. Backend (Spring Boot)
-
-1. Abre la carpeta `Backend/Backend/` en **IntelliJ IDEA**
-2. Configura tus credenciales en `src/main/resources/application.properties`:
+Configurar `Backend/Backend/src/main/resources/application.properties`:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/vaxminder_db
 spring.datasource.username=root
-spring.datasource.password=TU_CONTRASEÑA
+spring.datasource.password=TU_CONTRASENA
 ```
 
-3. Ejecuta la aplicación — corre en el puerto **8080**:
+Ejecutar:
 ```bash
+cd Backend/Backend
 mvn spring-boot:run
 ```
 
----
+El backend queda disponible en `http://localhost:8080`.
 
-### 3. Frontend (React + Vite)
+### 3. Python (analisis de datos)
 
-1. Abre una terminal en la carpeta `Frontend con Backend/`
-2. Instala las dependencias:
 ```bash
-npm install
+cd python
+pip install -r requirements.txt
+python main.py
 ```
-3. Inicia el servidor de desarrollo:
+
+Genera las graficas `.png` y los archivos `.json` en `src/assets/`.
+
+### 4. Frontend
+
 ```bash
+cd "Frontend con Backend"
+npm install
 npm run dev
 ```
-4. Abre el navegador en **http://localhost:5173**
 
-> ⚠️ El backend debe estar corriendo en el puerto 8080 antes de iniciar el frontend.
+Abrir `http://localhost:5173`.
+
+> El backend debe estar corriendo antes de iniciar el frontend y Python.
 
 ---
 
-## 🔗 Endpoints de la API
+## Flujo de datos Python
 
-| Método | Ruta | Acceso | Descripción |
+```
+API REST Spring Boot → requests → Pandas → Matplotlib → assets/ React
+```
+
+| Paso | Descripcion |
+|---|---|
+| Consumo | 5 endpoints GET con autenticacion JWT |
+| Limpieza | Normalizacion de campos anidados, fechas y tipos |
+| Filtros | 6 filtros de negocio con query() y operadores logicos |
+| Agrupaciones | 10 agrupaciones con groupby(), incluyendo panel por centro |
+| Graficas | 9 graficas de tipos: barras, torta, lineas, barras horizontales |
+| Exportacion | 11 archivos .json y 9 archivos .png |
+
+---
+
+## Endpoints de la API
+
+| Metodo | Ruta | Acceso | Descripcion |
 |---|---|---|---|
-| POST | `/api/auth/registro` | Público | Registro de paciente |
-| POST | `/api/auth/login` | Público | Login de paciente |
-| POST | `/api/auth/centros/registro` | Público | Registro de centro médico |
-| POST | `/api/auth/centros/login` | Público | Login de centro médico |
+| POST | `/api/auth/registro` | Publico | Registro de paciente |
+| POST | `/api/auth/login` | Publico | Login de paciente |
+| POST | `/api/auth/centros/registro` | Publico | Registro de centro medico |
+| POST | `/api/auth/centros/login` | Publico | Login de centro medico |
 | PUT | `/api/auth/centros/perfil` | JWT | Editar perfil del centro |
 | PUT | `/api/usuarios/{id}` | JWT | Editar perfil del paciente |
-| GET | `/api/vacunascatalogo` | Público | Catálogo de vacunas |
+| GET | `/api/vacunascatalogo` | Publico | Catalogo de vacunas |
 | GET | `/api/vacunascatalogo/sugeridas/{id}` | JWT | Vacunas sugeridas por edad |
-| GET | `/api/centrosmedicos` | Público | Lista de centros médicos |
-| POST | `/api/registrovacunacion` | JWT | Registrar vacunación |
+| GET | `/api/centrosmedicos` | Publico | Lista de centros medicos |
+| POST | `/api/registrovacunacion` | JWT | Registrar vacunacion |
 | GET | `/api/registrovacunacion/usuario/{id}` | JWT | Carnet del paciente |
 | GET | `/api/alertas/usuario/{id}` | JWT | Alertas del paciente |
-| GET | `/api/historialpdf/usuario/{id}` | JWT | Historial de PDFs |
-| POST | `/api/historialpdf` | JWT | Guardar registro de PDF |
 
 ---
 
-## 👤 Datos de Prueba
+## Datos de prueba
 
-### Pacientes registrados
-| Documento | Nombre | Tipo Sangre |
-|---|---|---|
-| 1192742853 | Anna Mestra | A+ |
-| 1001234567 | Camila Torres | O+ |
-| 1002345678 | Andrés Gómez | A+ |
-| 1003456789 | Valentina Cardona | B+ |
-| 1004567890 | Sebastián Arango | AB+ |
-| 1038134116 | Carlos Mestra | O+ |
+**Pacientes**
 
-### Centros Médicos registrados
-| NIT | Razón Social | Ciudad |
+| Documento | Nombre |
+|---|---|
+| 1192742853 | Anna Mestra |
+| 1001234567 | Camila Torres |
+| 1002345678 | Andres Gomez |
+| 1003456789 | Valentina Cardona |
+| 1004567890 | Sebastian Arango |
+
+**Centros medicos** (contrasena: `123456` para todos)
+
+| NIT | Razon Social | Ciudad |
 |---|---|---|
-| 8000123456 | Hospital San Vicente Fundación | Medellín |
-| 8000234567 | Clínica Las Américas | Medellín |
+| 8000123456 | Hospital San Vicente Fundacion | Medellin |
+| 8000234567 | Clinica Las Americas | Medellin |
 | 8000345678 | IPS Comfama Bello | Bello |
-| 8000456789 | Unidad de Vacunación Itagüí | Itagüí |
-| 8000567890 | Hospital General de Medellín | Medellín |
-| 8000678901 | Clínica Soma | Medellín |
-| 8000789012 | IPS Sura Centro | Medellín |
-| 8000890123 | Puesto de Salud Envigado | Envigado |
-| 8000901234 | Clínica León XIII | Medellín |
-| 8001012345 | Centro Salud Pablo Tobón Uribe | Medellín |
+| 8000456789 | Unidad de Vacunacion Itagui | Itagui |
+| 8000789012 | IPS Sura Centro | Medellin |
 
 ---
 
-## ✨ Funcionalidades Destacadas
+## Funcionalidades destacadas
 
-- 🔐 Autenticación JWT separada para pacientes y centros médicos
-- 💉 Cálculo automático de próxima dosis según el intervalo de cada vacuna
-- 🚫 Campo "próxima dosis" se deshabilita y pone en gris al registrar la última dosis del esquema
-- 📄 Generación y descarga de carnet en PDF con jsPDF
-- 🔔 Sistema de alertas de próximas dosis pendientes
-- 🗺️ Lista desplegable con todos los municipios y ciudades de Colombia (DIVIPOLA - DANE)
-- ✅ Validaciones en tiempo real: solo letras en nombres, solo números en documentos y teléfonos, máximo 10 dígitos en teléfono
-- 🏥 Portal del centro médico con búsqueda de pacientes y registro de vacunaciones
-- ✏️ Edición de perfil para pacientes y centros médicos (NIT inmutable)
-
----
-
-## 👩‍💻 Desarrollado por
-
-Proyecto académico — ITecnico en Desarrollo de Software CESDE 
-**VaxMinder** © 2026
+- Autenticacion JWT separada para pacientes y centros medicos
+- Calculo automatico de proxima dosis segun el intervalo de cada vacuna
+- Campo "proxima dosis" bloqueado al registrar la ultima dosis del esquema
+- Analitica dinamica por centro: cada portal muestra solo sus propios datos
+- Comparacion de centros medicos a nivel del sistema
+- Estado de vacunacion del paciente con barra de progreso y conclusiones
+- Generacion y descarga de carnet en PDF con jsPDF
+- Lista completa de municipios de Colombia (DIVIPOLA - DANE)
