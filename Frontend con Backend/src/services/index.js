@@ -1,4 +1,3 @@
-// services/index.js — alineado 100% con el backend VaxMinder
 const API = 'http://localhost:8080'
 
 const authHdr = () => ({ 'Authorization': `Bearer ${localStorage.getItem('vax_token') || ''}` })

@@ -3,8 +3,6 @@ import { AuthContext } from '../context/AuthContext'
 import { alertasService } from '../services/index'
 import '../styles/alertas.css'
 
-// Alerta del backend: { idalerta, idusuario{idusuario,nombre,...},
-//   idregistro{idregistro,...}, tipoalerta, fechaalerta, mensaje, estado, fechaenvio }
 
 export const AlertasPage = () => {
   const { user }              = useContext(AuthContext)

@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext'
 import { carnetService, alertasService, vacunasService } from '../services/index'
 import '../styles/dashboard.css'
 
-// ── Componentes pequeños ──────────────────────────────────────────────────────
+// Componentes pequeños 
 const KpiCard = ({ icon, valor, label, color, bg }) => (
   <div style={{ background: bg, borderRadius: 12, padding: 16, textAlign: 'center', border: `1.5px solid ${color}22` }}>
     <div style={{ fontSize: 24, marginBottom: 6 }}>{icon}</div>
@@ -195,7 +195,7 @@ export const DashboardPage = () => {
         </div>
       )}
 
-      {/* ── Mi Estado de Vacunación ───────────────────────────────────────── */}
+      {/* ── Mi Estado de Vacunación ── */}
       <div className="dashboard-section">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
           <div>

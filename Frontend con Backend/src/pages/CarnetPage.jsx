@@ -11,7 +11,6 @@ import '../styles/carnet.css'
 //   idvacuna:      { idvacuna, nombrevacuna, descripcion, dosisrequeridas, ... },
 //   idcentromedico:{ idcentro, nombrecentro, ciudad, direccion, telefono, tipocentro } | null
 // }
-//
 // El carnet muestra:
 // - Datos del usuario (de idusuario anidado en cada registro, o del contexto)
 // - Por cada registro: vacuna, fecha, dosis, lote, centro, próxima dosis, observaciones
@@ -24,7 +23,7 @@ export const CarnetPage = () => {
   const [error,     setError]     = useState('')
   const [success,   setSuccess]   = useState('')
   
-  // ── Estado para incentivos de vacunación ──────────────────
+  // Estado para incentivos de vacunación 
   const [personasVacuna, setPersonasVacuna] = useState([])
   const [esquemasCompletos, setEsquemasCompletos] = useState([])
   const [loadingIncentivos, setLoadingIncentivos] = useState(false)
@@ -38,7 +37,7 @@ export const CarnetPage = () => {
       .finally(() => setLoading(false))
   }, [user])
 
-  // ── Cargar datos de incentivos ────────────────────────────
+  // Cargar datos de incentivos 
   const cargarIncentivos = async () => {
     setLoadingIncentivos(true)
     try {
@@ -67,7 +66,7 @@ export const CarnetPage = () => {
     setLoadingIncentivos(false)
   }
 
-  // ── Calcular vacunas faltantes del usuario ─────────────────
+  // Calcular vacunas faltantes del usuario 
   const calcularVacunasFaltantes = () => {
     if (carnet.length === 0 || !personasVacuna) return []
     
@@ -103,7 +102,7 @@ export const CarnetPage = () => {
       const W = doc.internal.pageSize.getWidth()
       const M = 14
 
-      // ── Header ──────────────────────────────────────────────
+      // Header 
       doc.setFillColor(26, 58, 92)
       doc.rect(0, 0, W, 30, 'F')
       doc.setTextColor(255)
@@ -111,7 +110,7 @@ export const CarnetPage = () => {
       doc.setFontSize(9);  doc.text('Carnet Digital de Vacunación', M, 24)
       doc.text(`Generado: ${new Date().toLocaleDateString('es-ES')}`, W - M, 24, { align: 'right' })
 
-      // ── Datos del usuario — tabla usuarios ───────────────────
+      // Datos del usuario — tabla usuarios 
       doc.setFillColor(240, 247, 251)
       doc.roundedRect(M, 34, W - M * 2, 34, 3, 3, 'F')
       doc.setTextColor(33); doc.setFontSize(9)
@@ -127,7 +126,7 @@ export const CarnetPage = () => {
       doc.text(`Tipo Sangre: ${user?.tiposangre || '—'}`,   W / 2 + 5, 54)
       doc.text(`Teléfono: ${user?.telefono || '—'}`,        W / 2 + 5, 60)
 
-      // ── Registros de vacunación ──────────────────────────────
+      // Registros de vacunación 
       let y = 76
       doc.setFontSize(11); doc.setTextColor(26, 58, 92)
       doc.setFont(undefined, 'bold')
@@ -215,7 +214,7 @@ export const CarnetPage = () => {
         </div>
       </div>
 
-      {/* ── Panel de Incentivos de Vacunación ────────────────────── */}
+      {/* ── Panel de Incentivos de Vacunación ─*/}
       <div style={{background:'linear-gradient(135deg,#fff3e0 0%,#ffe0b2 100%)',border:'2px solid #ff9800',borderRadius:'0.75rem',padding:'1.5rem',marginBottom:'1.5rem'}}>
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1rem'}}>
           <h2 style={{margin:0,color:'#e65100',fontSize:'1.25rem'}}>🎯 ¡Cumple tu Esquema de Vacunación!</h2>

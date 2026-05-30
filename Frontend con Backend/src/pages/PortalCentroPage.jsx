@@ -6,7 +6,7 @@ import '../styles/portal-centro.css'
 
 const API = 'http://localhost:8080'
 
-// ── Mini barra horizontal ─────────────────────────────────────────────────────
+// ── Mini barra horizontal ───
 const Barra = ({ valor, max, color = '#0099ab', label, sublabel }) => {
   const pct = max > 0 ? Math.round((valor / max) * 100) : 0
   return (
@@ -22,7 +22,7 @@ const Barra = ({ valor, max, color = '#0099ab', label, sublabel }) => {
   )
 }
 
-// ── Tarjeta KPI ───────────────────────────────────────────────────────────────
+// ── Tarjeta KPI ───
 const KpiCard = ({ icon, valor, label, color, bg, small }) => (
   <div style={{ background: bg, borderRadius: 12, padding: 16, textAlign: 'center', border: `1.5px solid ${color}22`, boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
     <div style={{ fontSize: 22, marginBottom: 6 }}>{icon}</div>
@@ -31,7 +31,7 @@ const KpiCard = ({ icon, valor, label, color, bg, small }) => (
   </div>
 )
 
-// ── Gráfica de barras verticales (CSS) ───────────────────────────────────────
+// ── Gráfica de barras verticales (CSS) ───
 const GraficaBarras = ({ datos, keyX, keyY, color = '#0099ab', titulo, conclusion }) => {
   if (!datos || datos.length === 0) return null
   const maxVal = Math.max(...datos.map(d => d[keyY] || 0), 1)
@@ -62,7 +62,7 @@ const GraficaBarras = ({ datos, keyX, keyY, color = '#0099ab', titulo, conclusio
   )
 }
 
-// ── Gráfica de torta (CSS + SVG simple) ──────────────────────────────────────
+// ── Gráfica de torta (CSS + SVG simple) ───
 const GraficaTorta = ({ datos, keyLabel, keyVal, titulo, conclusion }) => {
   if (!datos || datos.length === 0) return null
   const total = datos.reduce((s, d) => s + (d[keyVal] || 0), 0)
@@ -133,14 +133,14 @@ export const PortalCentroPage = () => {
   const [historial,     setHistorial]     = useState([])
   const [errorPaciente, setErrorPaciente] = useState('')
 
-  // ── Analítica ─────────────────────────────────────────────────────────────
+  // Analítica 
   const [mostrarAnalisis, setMostrarAnalisis] = useState(false)
   const [loadingAnalisis, setLoadingAnalisis] = useState(false)
   const [errorAnalisis,   setErrorAnalisis]   = useState('')
   const [miCentro,        setMiCentro]        = useState(null)
   const [todosCentros,    setTodosCentros]     = useState([])
 
-  // ── Edición perfil ────────────────────────────────────────────────────────
+  // Edición perfil 
   const [editando,   setEditando]   = useState(false)
   const [editData,   setEditData]   = useState({ razonsocial:'', direccion:'', telefono:'', ciudad:'' })
   const [editErr,    setEditErr]    = useState({})
@@ -169,7 +169,7 @@ export const PortalCentroPage = () => {
     }
   }, [editando, centro])
 
-  // ── Cargar analítica del centro logueado ──────────────────────────────────
+  // Cargar analítica del centro logueado 
   const cargarAnalisis = async () => {
     setLoadingAnalisis(true); setErrorAnalisis('')
     try {
@@ -197,7 +197,7 @@ export const PortalCentroPage = () => {
     setLoadingAnalisis(false)
   }
 
-  // ── Derivar datos del centro para las gráficas ────────────────────────────
+  // Derivar datos del centro para las gráficas 
 
   // Vacunas aplicadas en este centro
   const vacunasCentro = (() => {
@@ -232,7 +232,7 @@ export const PortalCentroPage = () => {
 
   const maxPersonas = Math.max(...comparacionGlobal.map(c => c.personas_vacunadas || 0), 1)
 
-  // ── Guardar perfil ────────────────────────────────────────────────────────
+  // Guardar perfil 
   const handleSavePerfil = async (e) => {
     e.preventDefault()
     const errs = {}
@@ -256,7 +256,7 @@ export const PortalCentroPage = () => {
     finally  { setSavingEdit(false) }
   }
 
-  // ── Búsqueda paciente ─────────────────────────────────────────────────────
+  // Búsqueda paciente 
   const buscarPaciente = async () => {
     const doc = docBusqueda.trim()
     if (!doc || !/^\d+$/.test(doc)) { setErrorPaciente('Ingresa un número de documento válido'); return }
@@ -273,7 +273,7 @@ export const PortalCentroPage = () => {
     finally  { setBuscando(false) }
   }
 
-  // ── Helpers vacunación ────────────────────────────────────────────────────
+  // Helpers vacunación 
   const getVacuna   = id => vacunas.find(v => String(v.idvacuna) === String(id))
   const getMaxDosis = id => getVacuna(id)?.dosisrequeridas || 99
   const calcDosis   = id => {

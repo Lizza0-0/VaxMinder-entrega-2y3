@@ -1,18 +1,7 @@
-"""
-analitica_centros.py – Funciones especializadas en analítica de centros médicos
-Genera agrupaciones específicamente para el dashboard de centros médicos
-
-Utilizadas por: python/main.py para exportar datos a PortalCentroPage
-"""
-
 import pandas as pd
-
 
 def generar_analitica_centros(df_registros, df_vacunas, df_centros):
     """
-    Genera agrupaciones analíticas enfocadas en los centros médicos.
-    Retorna un diccionario con insights para el portal de centros.
-    
     Agrupaciones generadas:
     - Centro performance: personas vacunadas, dosis, promedio, etc.
     - Vacunas más aplicadas por centro
@@ -21,7 +10,7 @@ def generar_analitica_centros(df_registros, df_vacunas, df_centros):
     """
     analitica = {}
     
-    # ── AGRUPACION 1: Performance de centros ────────────────────────────────
+    # AGRUPACION 1: Performance de centros 
     # Estadísticas resumidas de cada centro médico
     if not df_registros.empty and "idcentromedico" in df_registros.columns:
         df_temp = df_registros.dropna(subset=["idcentromedico"]).copy()
@@ -57,7 +46,7 @@ def generar_analitica_centros(df_registros, df_vacunas, df_centros):
         analitica["centros_performance"] = pd.DataFrame()
     
     
-    # ── AGRUPACION 2: Vacunas más aplicadas por centro ──────────────────────
+    # AGRUPACION 2: Vacunas más aplicadas por centro
     # Top 5 vacunas en cada centro
     if not df_registros.empty and "idcentromedico" in df_registros.columns and "nombrevacuna" in df_registros.columns:
         vacunas_centro = df_registros.dropna(subset=["idcentromedico"]).groupby(
@@ -71,7 +60,7 @@ def generar_analitica_centros(df_registros, df_vacunas, df_centros):
         analitica["vacunas_por_centro"] = pd.DataFrame()
     
     
-    # ── AGRUPACION 3: Cumplimiento de esquema por centro ───────────────────
+    # AGRUPACION 3: Cumplimiento de esquema por centro 
     # Porcentaje de personas que completaron esquema en cada centro
     if (not df_registros.empty and not df_vacunas.empty and 
         "idcentromedico" in df_registros.columns and "dosisrequeridas" in df_vacunas.columns):
@@ -108,7 +97,7 @@ def generar_analitica_centros(df_registros, df_vacunas, df_centros):
         analitica["esquema_cumplimiento_centro"] = pd.DataFrame()
     
     
-    # ── AGRUPACION 4: Tendencia temporal por centro ────────────────────────
+    # AGRUPACION 4: Tendencia temporal por centro 
     # Vacunaciones por mes en cada centro (top 5 centros)
     if not df_registros.empty and "idcentromedico" in df_registros.columns and "fechaaplicacion" in df_registros.columns:
         df_temp = df_registros.dropna(subset=["idcentromedico", "fechaaplicacion"]).copy()
@@ -138,7 +127,7 @@ def generar_analitica_centros(df_registros, df_vacunas, df_centros):
         analitica["tendencia_temporal_centros"] = pd.DataFrame()
     
     
-    # ── AGRUPACION 5: Resumen ejecutivo por centro ───────────────────────
+    # AGRUPACION 5: Resumen ejecutivo por centro 
     # KPI clave para cada centro
     if not analitica["centros_performance"].empty:
         kpi_centros = analitica["centros_performance"][[
@@ -167,7 +156,7 @@ def generar_analitica_paciente(df_registros, df_vacunas, idusuario):
     """
     analitica = {}
     
-    # ── Registros del paciente ──────────────────────────────────────────────
+    # Registros del paciente 
     registros_paciente = df_registros[df_registros["idusuario"] == idusuario]
     
     if registros_paciente.empty:
@@ -176,7 +165,7 @@ def generar_analitica_paciente(df_registros, df_vacunas, idusuario):
         analitica["progreso"] = {"dosis_aplicadas": 0, "dosis_requeridas": 0}
         return analitica
     
-    # ── Vacunas del paciente ────────────────────────────────────────────────
+    # Vacunas del paciente 
     vacunas_unicas = registros_paciente["idvacuna"].unique()
     vacunas_paciente = []
     
@@ -188,7 +177,7 @@ def generar_analitica_paciente(df_registros, df_vacunas, idusuario):
             "dosis_aplicadas": registros_paciente[registros_paciente["idvacuna"] == vid]["numerodosis"].max(),
         })
     
-    # ── Personas con mismas vacunas ─────────────────────────────────────────
+    # Personas con mismas vacunas 
     personas_mismas_vacunas = []
     vacunas_ids = [v["idvacuna"] for v in vacunas_paciente]
     
@@ -212,7 +201,7 @@ def generar_analitica_paciente(df_registros, df_vacunas, idusuario):
             "porcentaje_completo": round((completos / personas * 100) if personas > 0 else 0, 2)
         })
     
-    # ── Progreso del paciente ───────────────────────────────────────────────
+    # Progreso del paciente 
     dosis_requeridas_total = 0
     for vacuna_info in vacunas_paciente:
         vacuna_full = df_vacunas[df_vacunas["idvacuna"] == vacuna_info["idvacuna"]].iloc[0]
@@ -225,7 +214,7 @@ def generar_analitica_paciente(df_registros, df_vacunas, idusuario):
         "porcentaje": round((dosis_aplicadas / dosis_requeridas_total * 100) if dosis_requeridas_total > 0 else 0, 2)
     }
     
-    # ── Mensaje motivacional ────────────────────────────────────────────────
+    # Mensaje motivacional 
     if progreso["dosis_aplicadas"] >= progreso["dosis_requeridas"]:
         mensaje = f"¡Excelente! Has completado tu esquema de vacunación. Continúa protegiendo tu salud."
     else:

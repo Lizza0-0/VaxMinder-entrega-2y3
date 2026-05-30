@@ -1,11 +1,3 @@
-"""
-VaxMinder - Analisis de datos
-Flujo: API REST Spring Boot -> Python requests -> Pandas -> Matplotlib -> React
-
-Requisitos: pip install -r requirements.txt
-Ejecucion:  python main.py  (con el backend corriendo en localhost:8080)
-"""
-
 import pandas as pd
 
 from notebook.consumo import (
