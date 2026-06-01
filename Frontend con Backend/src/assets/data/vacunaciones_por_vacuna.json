@@ -2,26 +2,31 @@
   {
     "nombrevacuna": "COVID-19 Bivalente",
     "total_aplicaciones": 4,
-    "porcentaje": 40.0
+    "porcentaje": 36.4
   },
   {
     "nombrevacuna": "Fiebre Amarilla",
     "total_aplicaciones": 2,
-    "porcentaje": 20.0
+    "porcentaje": 18.2
   },
   {
     "nombrevacuna": "Tetanos Td",
     "total_aplicaciones": 2,
-    "porcentaje": 20.0
+    "porcentaje": 18.2
   },
   {
     "nombrevacuna": "Influenza",
     "total_aplicaciones": 1,
-    "porcentaje": 10.0
+    "porcentaje": 9.1
   },
   {
     "nombrevacuna": "Rotavirus",
     "total_aplicaciones": 1,
-    "porcentaje": 10.0
+    "porcentaje": 9.1
+  },
+  {
+    "nombrevacuna": "VPH Bivalente",
+    "total_aplicaciones": 1,
+    "porcentaje": 9.1
   }
 ]

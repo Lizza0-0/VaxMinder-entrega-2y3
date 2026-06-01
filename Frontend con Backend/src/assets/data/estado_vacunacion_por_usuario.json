@@ -71,6 +71,16 @@
   },
   {
     "idusuario": 1192742853,
+    "idvacuna": 7,
+    "nombrevacuna": "VPH Bivalente",
+    "dosis_max_aplicada": 1,
+    "dosisrequeridas": 2,
+    "requiererefuerzo": false,
+    "dosis_faltantes": 1,
+    "estado": "en_progreso"
+  },
+  {
+    "idusuario": 1192742853,
     "idvacuna": 8,
     "nombrevacuna": "Fiebre Amarilla",
     "dosis_max_aplicada": 1,
@@ -137,16 +147,6 @@
     "dosisrequeridas": 4,
     "requiererefuerzo": false,
     "dosis_faltantes": 4,
-    "estado": "pendiente"
-  },
-  {
-    "idusuario": 1192742853,
-    "idvacuna": 7,
-    "nombrevacuna": "VPH Bivalente",
-    "dosis_max_aplicada": 0,
-    "dosisrequeridas": 2,
-    "requiererefuerzo": false,
-    "dosis_faltantes": 2,
     "estado": "pendiente"
   },
   {

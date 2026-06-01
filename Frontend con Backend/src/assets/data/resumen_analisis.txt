@@ -3,31 +3,31 @@
 ============================================================
 
 KPIs:
-  total_vacunaciones: 10
+  total_vacunaciones: 11
   total_vacunas_catalogo: 10
-  alertas_pendientes: 6
+  alertas_pendientes: 7
   total_centros: 10
   vacuna_mas_aplicada: COVID-19 Bivalente
   total_personas_vacunadas: 6
   total_personas_esquema_completo: 6
 
 Filtros:
-  primeras_dosis: 9 registros
+  primeras_dosis: 10 registros
   vacunas_refuerzo_multidosis: 1 registros
-  alertas_pendientes: 6 registros
+  alertas_pendientes: 7 registros
   intervalo_largo_sin_refuerzo: 6 registros
-  con_proxima_dosis: 6 registros
+  con_proxima_dosis: 7 registros
   vencimientos_enviados: 0 registros
 
 Agrupaciones:
-  vacunaciones_por_vacuna: 5 registros
+  vacunaciones_por_vacuna: 6 registros
   vacunaciones_por_dosis: 2 registros
   alertas_por_estado: 1 registros
   alertas_por_tipo: 1 registros
   vacunaciones_por_mes: 5 registros
   centros_por_ciudad: 4 registros
   vacunaciones_por_centro: 5 registros
-  personas_por_vacuna: 5 registros
+  personas_por_vacuna: 6 registros
   esquemas_completados: 4 registros
   estado_vacunacion_por_usuario: 60 registros
   resumen_vacunacion_por_usuario: 6 registros

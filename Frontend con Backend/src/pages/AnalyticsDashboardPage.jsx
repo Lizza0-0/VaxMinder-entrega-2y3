@@ -3,28 +3,28 @@ import '../styles/dashboard.css'
 
 const GRAFICAS = [
   {
-    src: '/graficos/lineas_vacunaciones_por_mes.png',
-    titulo: 'Evolución mensual de vacunaciones',
-    conclusion:
-      'Permite identificar picos de demanda y períodos de baja cobertura vacunal a lo largo del tiempo.',
-  },
-  {
-    src: '/graficos/barras_vacunaciones_por_vacuna.png',
+    src: '/src/assets/graficos/barras_vacunaciones.png',
     titulo: 'Vacunaciones por tipo de vacuna',
     conclusion:
       'Identifica cuáles vacunas tienen mayor demanda en la plataforma y cuáles requieren mayor promoción.',
   },
   {
-    src: '/graficos/torta_distribucion_dosis.png',
+    src: '/src/assets/graficos/torta_dosis.png',
     titulo: 'Distribución por número de dosis',
     conclusion:
       'Muestra qué proporción de registros corresponde a primeras dosis frente a dosis de refuerzo.',
   },
   {
-    src: '/graficos/scatter_dosis_vs_intervalo.png',
-    titulo: 'Dosis requeridas vs Intervalo entre dosis',
+    src: '/src/assets/graficos/lineas_vacunaciones_tiempo.png',
+    titulo: 'Evolución temporal de vacunaciones',
     conclusion:
-      'Revela si vacunas con más dosis requeridas tienen intervalos más largos entre aplicaciones.',
+      'Permite identificar picos de demanda y períodos de baja cobertura vacunal a lo largo del tiempo.',
+  },
+  {
+    src: '/src/assets/graficos/barras_alertas_estado.png',
+    titulo: 'Alertas por estado',
+    conclusion:
+      'Revela la distribución de alertas según el estado de cumplimiento de esquemas de vacunación.',
   },
 ]
 
@@ -33,7 +33,7 @@ export const AnalyticsDashboardPage = () => {
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    fetch('/graficos/resumen_vacunaciones.json')
+    fetch('/src/assets/data/kpis.json')
       .then(r => {
         if (!r.ok) throw new Error()
         return r.json()
@@ -46,18 +46,33 @@ export const AnalyticsDashboardPage = () => {
     ? [
         {
           icono: '💉',
-          valor: resumen.total_registros,
+          valor: resumen.total_vacunaciones,
           etiqueta: 'Registros de vacunación',
         },
         {
-          icono: '🔁',
-          valor: resumen.vacunas_requieren_refuerzo,
-          etiqueta: 'Vacunas con refuerzo',
+          icono: '👥',
+          valor: resumen.total_personas_vacunadas,
+          etiqueta: 'Personas vacunadas',
         },
         {
-          icono: '📅',
-          valor: `${resumen.promedio_intervalo_dias} días`,
-          etiqueta: 'Intervalo promedio entre dosis',
+          icono: '✅',
+          valor: resumen.total_personas_esquema_completo,
+          etiqueta: 'Esquema completo',
+        },
+        {
+          icono: '📋',
+          valor: resumen.total_vacunas_catalogo,
+          etiqueta: 'Vacunas en catálogo',
+        },
+        {
+          icono: '⚠️',
+          valor: resumen.alertas_pendientes,
+          etiqueta: 'Alertas pendientes',
+        },
+        {
+          icono: '🏥',
+          valor: resumen.total_centros,
+          etiqueta: 'Centros médicos',
         },
       ]
     : []
@@ -91,13 +106,6 @@ export const AnalyticsDashboardPage = () => {
               </div>
             </div>
           ))}
-          <div className="stat-card">
-            <div className="stat-icon">⏰</div>
-            <div className="stat-content">
-              <h3>{resumen.proxima_dosis_60_dias}</h3>
-              <p>Próximas dosis en 60 días</p>
-            </div>
-          </div>
         </div>
       )}
 

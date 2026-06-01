@@ -2,9 +2,9 @@
   {
     "idcentromedico": 2,
     "personas_vacunadas": 4,
-    "total_dosis": 6,
-    "promedio_dosis": 1.17,
-    "pct_del_total": 60.0,
+    "total_dosis": 7,
+    "promedio_dosis": 1.14,
+    "pct_del_total": 63.6,
     "ranking": 1,
     "total_centros_sistema": 5,
     "vacuna_top": "COVID-19 Bivalente",
@@ -24,12 +24,18 @@
         "nombre": "Influenza",
         "personas": 1,
         "dosis": 1
+      },
+      {
+        "nombre": "VPH Bivalente",
+        "personas": 1,
+        "dosis": 1
       }
     ],
     "vacunas_por_tipo": {
       "COVID-19 Bivalente": 2,
       "Fiebre Amarilla": 2,
-      "Influenza": 1
+      "Influenza": 1,
+      "VPH Bivalente": 1
     },
     "tendencia_mensual": [
       {
@@ -46,18 +52,18 @@
       },
       {
         "mes": "2026-05",
-        "total": 1
+        "total": 2
       }
     ],
     "alertas_por_estado": {
-      "pendiente": 5
+      "pendiente": 6
     },
-    "alertas_pendientes": 5,
-    "alertas_total": 5,
+    "alertas_pendientes": 6,
+    "alertas_total": 6,
     "distribucion_dosis": [
       {
         "dosis": "Dosis 1",
-        "total": 5
+        "total": 6
       },
       {
         "dosis": "Dosis 2",
@@ -73,7 +79,7 @@
     "personas_vacunadas": 1,
     "total_dosis": 1,
     "promedio_dosis": 1.0,
-    "pct_del_total": 10.0,
+    "pct_del_total": 9.1,
     "ranking": 2,
     "total_centros_sistema": 5,
     "vacuna_top": "Tetanos Td",
@@ -95,10 +101,10 @@
       }
     ],
     "alertas_por_estado": {
-      "pendiente": 2
+      "pendiente": 3
     },
-    "alertas_pendientes": 2,
-    "alertas_total": 2,
+    "alertas_pendientes": 3,
+    "alertas_total": 3,
     "distribucion_dosis": [
       {
         "dosis": "Dosis 1",
@@ -114,7 +120,7 @@
     "personas_vacunadas": 1,
     "total_dosis": 1,
     "promedio_dosis": 1.0,
-    "pct_del_total": 10.0,
+    "pct_del_total": 9.1,
     "ranking": 3,
     "total_centros_sistema": 5,
     "vacuna_top": "COVID-19 Bivalente",
@@ -155,7 +161,7 @@
     "personas_vacunadas": 1,
     "total_dosis": 1,
     "promedio_dosis": 1.0,
-    "pct_del_total": 10.0,
+    "pct_del_total": 9.1,
     "ranking": 4,
     "total_centros_sistema": 5,
     "vacuna_top": "Tetanos Td",
@@ -194,7 +200,7 @@
     "personas_vacunadas": 1,
     "total_dosis": 1,
     "promedio_dosis": 1.0,
-    "pct_del_total": 10.0,
+    "pct_del_total": 9.1,
     "ranking": 5,
     "total_centros_sistema": 5,
     "vacuna_top": "Rotavirus",
